@@ -8,6 +8,11 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    env:
+      REG_RU_HOST: ${{ secrets.REG_RU_HOST }}
+      REG_RU_USERNAME: ${{ secrets.REG_RU_USERNAME }}
+      REG_RU_PASSWORD: ${{ secrets.REG_RU_PASSWORD }}
+      REG_RU_PATH: ${{ secrets.REG_RU_PATH }}
     steps:
       - name: Get source
         uses: actions/checkout@v4
@@ -21,6 +26,7 @@ jobs:
       - name: Build static site
         run: npm run build
       - name: Upload to REG.RU Host-A over SSH
+        if: ${{ env.REG_RU_HOST != '' && env.REG_RU_USERNAME != '' && env.REG_RU_PASSWORD != '' && env.REG_RU_PATH != '' }}
         uses: appleboy/scp-action@v1
         with:
           host: ${{ secrets.REG_RU_HOST }}
@@ -30,4 +36,5 @@ jobs:
           source: dist/*
           target: ${{ secrets.REG_RU_PATH }}
           strip_components: 1
+
 
