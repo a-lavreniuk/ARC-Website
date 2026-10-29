@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LibraryPreview from '../components/demos/LibraryPreview.astro';
+import '../components/demos/library-preview.css';
+---
+<BaseLayout title="ARC — варианты мобильной демонстрации" description="Черновые варианты показа интерфейса ARC на мобильном устройстве." noindex={true}>
+  <main class="mobile-study">
+    <h1>Мобильная демонстрация</h1>
+    <p>Черновые варианты подачи библиотеки для выбора направления.</p>
+    <section><h2>1. Окно целиком</h2><p>Общий вид приложения. Детали намеренно мелкие.</p><div class="study-overview"><LibraryPreview /></div></section>
+    <section><h2>2. Крупный фрагмент с прокруткой</h2><p>Элементы сохраняют размер; окно можно сдвигать по горизонтали.</p><div class="study-scroll"><LibraryPreview /></div></section>
+    <section><h2>3. Один сценарий крупно</h2><p>Лента коллекций и карточки. Навбар можно показывать отдельно.</p><div class="study-focus"><LibraryPreview /></div></section>
+  </main>
+</BaseLayout>
+<style>
+.mobile-study { max-width:600px; padding:32px 20px 80px; margin:auto; }
+.mobile-study h1 { font-size:28px; line-height:1.1; }
+.mobile-study h2 { font-size:20px; }
+.mobile-study p { color:#b4b5bf; line-height:1.5; }
+.mobile-study section { margin-top:48px; }
+.study-overview { overflow:hidden; height:280px; }
+.study-overview :global(.arc-demo) { width:1100px; transform:scale(.32); transform-origin:top left; }
+.study-scroll { overflow-x:auto; border-radius:16px; }
+.study-scroll :global(.arc-demo) { width:1100px; }
+.study-focus { overflow:hidden; height:410px; border-radius:16px; }
+.study-focus :global(.arc-demo) { width:1100px; transform:translate(-20px,-120px) scale(.65); transform-origin:top left; }
+</style>

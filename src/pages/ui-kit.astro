@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const typeSamples = [
+  { token: 'Заголовок XXL', cls: 'type-heading-xxl', desktop: '64 / 64 · 600', laptop: '48 / 48', tablet: '36 / 36', mobile: '28 / 28' },
+  { token: 'Заголовок XL', cls: 'type-heading-xl', desktop: '48 / 48 · 600', laptop: '36 / 36', tablet: '28 / 28', mobile: '24 / 24' },
+  { token: 'Заголовок L', cls: 'type-heading-l', desktop: '34 / 34 · 600', laptop: '28 / 28', tablet: '24 / 24', mobile: '20 / 20' },
+  { token: 'Заголовок M', cls: 'type-heading-m', desktop: '28 / 28 · 600', laptop: '24 / 24', tablet: '20 / 20', mobile: '18 / 18' },
+  { token: 'Заголовок S', cls: 'type-heading-s', desktop: '22 / 22 · 600', laptop: '20 / 20', tablet: '18 / 18', mobile: '16 / 16' },
+  { token: 'Параграф XL', cls: 'type-paragraph-xl', desktop: '20 / 28 · 400', laptop: '18 / 26', tablet: '17 / 24', mobile: '16 / 22' },
+  { token: 'Параграф L', cls: 'type-paragraph-l', desktop: '16 / 24 · 400', laptop: '16 / 24', tablet: '16 / 24', mobile: '14 / 20' },
+  { token: 'Параграф M', cls: 'type-paragraph-m', desktop: '14 / 22 · 400', laptop: '14 / 22', tablet: '14 / 20', mobile: '13 / 18' },
+  { token: 'Параграф S', cls: 'type-paragraph-s', desktop: '12 / 16 · 400', laptop: '12 / 16', tablet: '12 / 16', mobile: '12 / 16' },
+];
+---
+<BaseLayout title="Компоненты сайта ARC" description="Черновая библиотека мастер-компонентов сайта ARC." noindex={true}>
+  <main class="kit-page">
+    <div class="kit-topbar"><a class="floating-menu__brand" href="/"><img class="brand-mark" src="/images/arc-logo.svg" alt="" /><span>ARC / UI-Kit</span></a><span class="kit-status">Черновик · по материалам Figma</span></div>
+    <header class="kit-header">
+      <p class="eyebrow">ДИЗАЙН-СИСТЕМА САЙТА</p>
+      <h1 class="type-heading-xxl">Мастер-компоненты ARC</h1>
+      <p class="type-paragraph-xl">Общие стили для UI-Kit и лендинга. Изменение компонентов здесь должно менять их на основной странице.</p>
+      <p class="kit-warning">Эта версия собрана по доступному контексту макета. Перед продолжением нужно сверить токены и варианты состояний в Figma.</p>
+    </header>
+    <section class="kit-section" aria-labelledby="type-title">
+      <div class="kit-section__heading"><div><p class="eyebrow">01 / ТИПОГРАФИКА</p><h2 class="type-heading-l" id="type-title">Google Sans</h2></div><span class="kit-metadata">Figma · веса 400 / 500 / 600</span></div>
+      <div class="type-specimens">
+        {typeSamples.map((item) => <article class="type-specimen"><div class="type-specimen__sample"><p class={item.cls}>Референсы ARC</p></div><div class="type-specimen__meta"><strong>{item.token}</strong><div><span>Десктоп {item.desktop}</span><span>Ноутбук {item.laptop}</span><span>Планшет {item.tablet}</span><span>Мобильный {item.mobile}</span></div></div></article>)}
+      </div>
+      <div class="font-weight-samples" aria-label="Примеры начертаний Google Sans">
+        <span style="font-weight:400">400 · Regular</span>
+        <span style="font-weight:500">500 · Medium</span>
+        <span style="font-weight:600">600 · SemiBold</span>
+      </div>
+      <p class="kit-footnote">Размер / межстрочный интервал в px · начертание указанное отдельно: Google Sans Medium / SemiBold (600) для заголовков, Regular (400) для параграфов. Letter-spacing: 0 px, если стиль Figma не задаёт иное.</p>
+    </section>
+    <section class="kit-section" aria-labelledby="color-title">
+      <div class="kit-section__heading"><div><p class="eyebrow">02 / ЦВЕТА</p><h2 class="type-heading-l" id="color-title">Тёмная палитра</h2></div><span class="kit-metadata">Черновые веб-токены</span></div>
+      <div class="color-swatches"><div><i style="--swatch:#111113"></i><span>Сайт · #111113</span></div><div><i style="--swatch:#1a1a1e"></i><span>Интерфейс · #1A1A1E</span></div><div><i style="--swatch:#ff5a29"></i><span>ARC Orange · #FF5A29</span></div><div><i style="--swatch:#b4b5bf"></i><span>Текст · #B4B5BF</span></div><div><i style="--swatch:#636471"></i><span>Вторичный · #636471</span></div></div>
+    </section>
+    <section class="kit-section" aria-labelledby="controls-title">
+      <div class="kit-section__heading"><div><p class="eyebrow">03 / МАСТЕР-КОМПОНЕНТЫ</p><h2 class="type-heading-l" id="controls-title">Элементы управления</h2></div><span class="kit-metadata">Общие классы сайта</span></div>
+      <div class="kit-controls"><div><span class="kit-label">Кнопки</span><div class="kit-control-row"><button class="button button--primary">Основная</button><button class="button button--secondary">Вторичная</button><a class="kit-link" href="#type-title">Ссылка ↗</a></div></div><div><span class="kit-label">Плавающее меню</span><div class="kit-menu-preview"><img class="brand-mark" src="/images/arc-logo.svg" alt="" /><a href="#">Демо</a><a href="#">Telegram ↗</a><button class="floating-menu__cta">Записаться</button></div></div><div><span class="kit-label">Поле формы</span><input class="text-field" placeholder="Электронная почта" aria-label="Пример поля формы" /></div><div><span class="kit-label">Состояние выбора</span><div class="kit-control-row"><span class="demo-chip">Библиотека</span><span class="demo-chip demo-chip--active">Коллекции</span><span class="demo-chip">Мудборд</span></div></div></div>
+    </section>
+    <footer class="kit-footer"><a href="/">← Вернуться на сайт</a><span>ARC-Website · внутренний черновик</span></footer>
+  </main>
+</BaseLayout>
+
+
+
+

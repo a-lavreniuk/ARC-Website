@@ -1,0 +1,53 @@
+---
+const collections = [
+  {name:'UI', detail:'128 карточек', sections:'16 разделов'},
+  {name:'Портреты', detail:'32 карточки', sections:''},
+  {name:'Пейзажи', detail:'512 карточек', sections:'12 разделов'},
+  {name:'Анатомия', detail:'64 карточки', sections:'16 разделов'}
+];
+const heights = [[154,275,154],[154,154,275],[275,154,344],[344,154,275],[276,154,154]];
+const colors = ['#79635e','#6f7d76','#8a776a','#686e7c','#8a7b81','#7b806e','#7d6f7b','#6f777b','#978675','#727d78','#86736c','#69747c','#8b7f72','#73766c','#796e75'];
+const icon = (name) => `/images/demo-icons/${name}.svg`;
+---
+<div class="arc-demo" aria-label="Предпросмотр библиотеки ARC">
+  <div class="arc-demo__surface">
+    <div class="arc-demo__navbar">
+      <div class="arc-demo__island arc-demo__nav">
+        <button type="button" class="arc-demo__active">Библиотека<span class="arc-demo__split"><img src={icon('chevron-down')} alt="" /></span></button>
+        <button type="button" class="arc-demo__tab">Коллекции</button>
+        <button type="button" class="arc-demo__tab">Мудборд</button>
+      </div>
+      <div class="arc-demo__island arc-demo__search">
+        {['tag','ai','eyedropper','image'].map((name, index) => <button type="button" class:list={['arc-demo__icon', {'arc-demo__icon--active': index === 0}]} aria-label={['Метки','Поиск AI','Цвет','Поиск по изображению'][index]}><img src={icon(name)} alt="" /></button>)}
+        <span class="arc-demo__placeholder">Поиск по меткам…</span>
+        <button type="button" class="arc-demo__icon" aria-label="Поиск"><img src={icon('search')} alt="" /></button>
+      </div>
+      <div class="arc-demo__island arc-demo__actions">
+        {['sort-desc','filter','grid-small'].map((name,index) => <button type="button" class="arc-demo__icon" aria-label={['Сортировка','Фильтры','Вид сетки'][index]}><img src={icon(name)} alt="" /></button>)}
+        <button type="button" class="arc-demo__add">Добавить</button>
+        <button type="button" class="arc-demo__icon" aria-label="Меню"><img src={icon('menu')} alt="" /></button>
+      </div>
+    </div>
+    <div class="arc-demo__collections">
+      {collections.map((c,i) => <div class="arc-demo__collection">
+        <div class="arc-demo__collection-images">{[0,1,2,3].map((j)=><div style={`background:${colors[(i*4+j)%colors.length]}`}></div>)}</div>
+        <div class="arc-demo__collection-label"><span>{c.name}</span><span>{c.detail}</span>{c.sections && <span>{c.sections}</span>}</div>
+      </div>)}
+      <div class="arc-demo__fade"></div>
+    </div>
+    <div class="arc-demo__separator"></div>
+    <div class="arc-demo__grid">
+      {heights.map((column,i)=><div class="arc-demo__column">{column.map((height,j)=><div class="arc-demo__card" style={`aspect-ratio: 275 / ${height}; background:${colors[i*3+j]}`}></div>)}</div>)}
+    </div>
+  </div>
+</div>
+<script>
+  const mobile = window.matchMedia('(max-width: 640px)');
+  const updatePreview = () => {
+    document.querySelectorAll<HTMLElement>('.arc-demo__surface').forEach((element) => {
+      element.inert = mobile.matches;
+    });
+  };
+  mobile.addEventListener('change', updatePreview);
+  updatePreview();
+</script>
