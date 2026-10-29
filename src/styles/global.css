@@ -320,8 +320,25 @@ button { color: inherit; }
 .hero__title { color: #230f09; }
 .hero__description { color: #37180e; }
 .hero__note { color: #f3f3f4; }
-.hero__cta { color: #242529; }
+
 @media (max-width: 1439px) { .hero__glow { height:1233px; background-image:linear-gradient(0turn,rgba(135,104,116,0) 0%,rgba(135,104,116,.04) 14%,rgba(148,100,98,.41) 28%,rgba(174,99,85,.74) 45%,rgba(224,93,57,.98) 63%,rgba(255,90,41,1) 80%,rgba(255,90,41,1) 100%); } }
 @media (max-width: 959px) { .hero__glow { height:845px; background-image:linear-gradient(0turn,rgba(135,104,116,0) 0%,rgba(135,104,116,.04) 11%,rgba(148,100,98,.41) 23%,rgba(174,99,85,.74) 36%,rgba(224,93,57,.98) 53%,rgba(255,90,41,1) 80%,rgba(255,90,41,1) 100%); } }
 @media (max-width: 479px) { .hero__glow { height:982px; background-image:linear-gradient(0turn,rgba(135,104,116,0) 0%,rgba(135,104,116,.04) 12%,rgba(148,100,98,.41) 23%,rgba(174,99,85,.74) 34%,rgba(224,93,57,.98) 57%,rgba(255,90,41,1) 80%,rgba(255,90,41,1) 100%); } }
+
+
+
+.arc-demo__island { box-shadow:inset 0 -8px 16px rgba(255,255,255,.04), inset 0 -1px 0 #44454d; }
+.button--hero { background:#f3f3f4; color:#1a1a1e; transition:background-color .3s ease-in-out,color .3s ease-in-out; }
+.button--hero:hover { background:#1a1a1e; color:#f3f3f4; }
+.arc-demo__icon:not(.arc-demo__icon--active):hover img { filter:brightness(0) saturate(100%) invert(97%); }
+.arc-demo__blur { position:absolute; z-index:3; left:0; right:0; bottom:0; height:192px; pointer-events:none; }
+.arc-demo__blur--1 { backdrop-filter:blur(2px);  mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.15) 35%,rgba(0,0,0,.5) 65%,#000 100%); }
+.arc-demo__blur--2 { backdrop-filter:blur(5px);  mask-image:linear-gradient(to bottom,transparent 25%,rgba(0,0,0,.1) 45%,rgba(0,0,0,.45) 70%,#000 100%); }
+.arc-demo__blur--3 { backdrop-filter:blur(8px);  mask-image:linear-gradient(to bottom,transparent 50%,rgba(0,0,0,.15) 65%,rgba(0,0,0,.55) 82%,#000 100%); }
+
+/* A shaded layer and three masked backdrop filters sit above the library cards. */
+.arc-demo__surface::after { content:""; position:absolute; z-index:4; inset:auto 0 0; height:244px; background:linear-gradient(0turn,rgba(26,26,30,1) 0%,rgba(26,26,30,.9) 23%,rgba(26,26,30,0) 100%); pointer-events:none; }
+.arc-demo__blur--1 { -webkit-mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.15) 35%,rgba(0,0,0,.5) 65%,#000 100%); }
+.arc-demo__blur--2 { -webkit-mask-image:linear-gradient(to bottom,transparent 25%,rgba(0,0,0,.1) 45%,rgba(0,0,0,.45) 70%,#000 100%); }
+.arc-demo__blur--3 { -webkit-mask-image:linear-gradient(to bottom,transparent 50%,rgba(0,0,0,.15) 65%,rgba(0,0,0,.55) 82%,#000 100%); }
 

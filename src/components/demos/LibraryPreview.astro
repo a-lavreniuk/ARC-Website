@@ -13,19 +13,19 @@ const icon = (name) => `/images/demo-icons/${name}.svg`;
   <div class="arc-demo__surface">
     <div class="arc-demo__navbar">
       <div class="arc-demo__island arc-demo__nav">
-        <button type="button" class="arc-demo__active">Библиотека<span class="arc-demo__split"><img src={icon('chevron-down')} alt="" /></span></button>
+        <button type="button" class="arc-demo__active">Библиотека<span class="arc-demo__split"><img src={icon('chevron-brand')} alt="" /></span></button>
         <button type="button" class="arc-demo__tab">Коллекции</button>
         <button type="button" class="arc-demo__tab">Мудборд</button>
       </div>
       <div class="arc-demo__island arc-demo__search">
-        {['tag','ai','eyedropper','image'].map((name, index) => <button type="button" class:list={['arc-demo__icon', {'arc-demo__icon--active': index === 0}]} aria-label={['Метки','Поиск AI','Цвет','Поиск по изображению'][index]}><img src={icon(name)} alt="" /></button>)}
+        {['tag','ai','eyedropper','image'].map((name, index) => <button type="button" class:list={['arc-demo__icon', {'arc-demo__icon--active': index === 0}]} aria-label={['Метки','Поиск AI','Цвет','Поиск по изображению'][index]}><img src={icon(index === 0 ? 'tag-active' : name)} alt="" /></button>)}
         <span class="arc-demo__placeholder">Поиск по меткам…</span>
         <button type="button" class="arc-demo__icon" aria-label="Поиск"><img src={icon('search')} alt="" /></button>
       </div>
       <div class="arc-demo__island arc-demo__actions">
         {['sort-desc','filter','grid-small'].map((name,index) => <button type="button" class="arc-demo__icon" aria-label={['Сортировка','Фильтры','Вид сетки'][index]}><img src={icon(name)} alt="" /></button>)}
         <button type="button" class="arc-demo__add">Добавить</button>
-        <button type="button" class="arc-demo__icon" aria-label="Меню"><img src={icon('menu')} alt="" /></button>
+        <button type="button" class="arc-demo__icon" aria-label="Меню"><img src={icon('chevron-down')} alt="" /></button>
       </div>
     </div>
     <div class="arc-demo__collections">
@@ -38,7 +38,7 @@ const icon = (name) => `/images/demo-icons/${name}.svg`;
     <div class="arc-demo__separator"></div>
     <div class="arc-demo__grid">
       {heights.map((column,i)=><div class="arc-demo__column">{column.map((height,j)=><div class="arc-demo__card" style={`aspect-ratio: 275 / ${height}; background:${colors[i*3+j]}`}></div>)}</div>)}
-    </div>
+    </div>    <div class="arc-demo__blur arc-demo__blur--1" aria-hidden="true"></div><div class="arc-demo__blur arc-demo__blur--2" aria-hidden="true"></div><div class="arc-demo__blur arc-demo__blur--3" aria-hidden="true"></div>
   </div>
 </div>
 <script>
@@ -51,3 +51,7 @@ const icon = (name) => `/images/demo-icons/${name}.svg`;
   mobile.addEventListener('change', updatePreview);
   updatePreview();
 </script>
+
+
+
+
