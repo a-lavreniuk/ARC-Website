@@ -23,5 +23,21 @@ const canonical = new URL(Astro.url.pathname, 'https://arcapp.ru');
     <meta property="og:image" content="https://arcapp.ru/images/arc-hero-demo.png" />
     <title>{title}</title>
   </head>
-  <body><slot /></body>
+  <body>
+    <div class="scroll-progress" aria-hidden="true"></div>
+    <slot />
+    <script>
+      const bar = document.querySelector<HTMLElement>('.scroll-progress');
+      const update = () => {
+        const root = document.documentElement;
+        const range = root.scrollHeight - root.clientHeight;
+        if (bar) bar.style.transform = `scaleX(${range > 0 ? Math.min(1, Math.max(0, window.scrollY / range)) : 0})`;
+      };
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      new ResizeObserver(update).observe(document.body);
+      update();
+    </script>
+  </body>
 </html>
+

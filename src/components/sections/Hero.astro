@@ -1,6 +1,7 @@
 ---
 import LibraryPreview from '../demos/LibraryPreview.astro';
 import '../demos/library-preview.css';
+import '../demos/arc-chips.css';
 ---
 <section class="hero" aria-labelledby="hero-title">
   <div class="hero__glow" aria-hidden="true"></div>
@@ -8,11 +9,13 @@ import '../demos/library-preview.css';
     <a class="hero__logo" href="#top" aria-label="ARC — на главную"><img class="brand-mark brand-mark--large" src="/images/arc-logo-hero.svg" alt="" /></a>
     <h1 id="hero-title" class="type-heading-xxl hero__title">Референсы в одном месте —<br class="desktop-break" /> на вашем компьютере</h1>
     <p class="type-paragraph-xl hero__description">Локальная библиотека референсов для дизайнеров и художников. Собирайте, организуйте и находите нужное без облака, даже когда материалов становится всё больше.</p>
-    <button class="button button--hero hero__cta" type="button">Записаться на бета-тест</button>
+    <button class="button button--hero hero__cta" type="button"><span class="button--hero__fill" aria-hidden="true"></span><span class="button--hero__fill button--hero__fill--dark" aria-hidden="true"></span><span class="button--hero__text">Записаться на бета-тест</span></button>
     <p class="type-paragraph-s hero__note" id="release-note">Ранний доступ для Windows уже открыт. Версия для Mac появится позже.</p>
   </div>
   <div class="hero__demo" id="demo"><LibraryPreview /></div>
 </section>
+
+
 
 
 

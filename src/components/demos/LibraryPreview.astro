@@ -42,15 +42,34 @@ const icon = (name) => `/images/demo-icons/${name}.svg`;
   </div>
 </div>
 <script>
+  import './search-demo';
   const mobile = window.matchMedia('(max-width: 640px)');
   const updatePreview = () => {
     document.querySelectorAll<HTMLElement>('.arc-demo__surface').forEach((element) => {
       element.inert = mobile.matches;
     });
   };
+  const resizeScene = () => {
+    document.querySelectorAll<HTMLElement>('.arc-demo').forEach((frame) => {
+      const surface = frame.querySelector<HTMLElement>('.arc-demo__surface');
+      if (!surface) return;
+      const visibleWidth = frame.clientWidth;
+      const displayWidth = mobile.matches ? Math.max(795, visibleWidth) : visibleWidth;
+      const logicalWidth = Math.max(1280, displayWidth);
+      surface.style.width = `${logicalWidth}px`;
+      surface.style.zoom = String(displayWidth / logicalWidth);
+    });
+  };
+  window.addEventListener('resize', resizeScene);
+  resizeScene();
   mobile.addEventListener('change', updatePreview);
   updatePreview();
 </script>
+
+
+
+
+
 
 
 
