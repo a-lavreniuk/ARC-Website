@@ -1,0 +1,43 @@
+---
+const columns = [
+  [{ h:154, w:519.53, ih:380.09, x:-57.4, y:-21.43 }, { h:214, w:554.06, ih:291.7, x:-346.09, y:-191.59 }, { h:170, w:372.78, ih:247.06, x:-89.27, y:-163.85 }],
+  [{ h:219, w:618.97, ih:320.32, x:-412.35, y:-98.63 }, { h:154, w:626.18, ih:460.82, x:-524.71, y:-155.19 }, { h:154, w:630.15, ih:463.74, x:-315.66, y:-191.88 }],
+  [{ h:154, cover:true }, { h:170, w:659.12, ih:439.41, x:-.29, y:-40.59 }, { h:214, w:658.53, ih:348.75, x:-330.86, y:0 }],
+  [{ h:154, w:752.65, ih:553.9, x:-388.82, y:-344.05 }, { h:214, w:582.35, ih:308.41, x:-188.52, y:0 }, { h:170, w:633.24, ih:422.16, x:-418.24, y:-27.65 }],
+  [{ h:154, w:624.41, ih:459.52, x:-524.12, y:-295.89 }, { h:170, w:623.24, ih:415.49, x:-522.94, y:-163.14 }, { h:214, w:616.76, ih:326.64, x:-515.29, y:-21.37 }],
+  [{ h:219, w:708.97, ih:366.89, x:-13.09, y:-133.33 }, { h:154, w:625, ih:459.96, x:-7.35, y:-338.42 }, { h:154, w:587.94, ih:432.68, x:-93.53, y:-318.29 }]
+];
+---
+<div class="capture-scene" role="img" aria-label="Выделение области экрана для скриншота в ARC">
+  <div class="capture-grid">
+    {columns.map(column => <div class="capture-column">{column.map(card =>
+      <div class="capture-card" style={`--card-h:${card.h}`}>
+        <img src="/images/collect/screenshot-source.png" alt="" draggable="false" class:list={[{ cover: card.cover }]} style={card.cover ? '' : `--w:${card.w}%;--h:${card.ih}%;--x:${card.x}%;--y:${card.y}%`} />
+      </div>
+    )}</div>)}
+  </div>
+  <div class="capture-selection"></div>
+  <div class="capture-toast" aria-hidden="true"><span>✓</span> Скриншот добавлен в библиотеку</div>
+  <img class="capture-cursor" src="/images/collect/screenshot-cursor.svg" alt="" />
+</div>
+<style>
+  .capture-scene { position:relative; width:100%; aspect-ratio:991/500; overflow:hidden; border:1px solid #2f3035; border-radius:16px; background:#1a1a1e; container-type:inline-size; }
+  .capture-grid { position:absolute; width:110.898%; height:100%; left:50%; top:50%; transform:translate(-50%,-50%); display:flex; gap:1.615cqw; align-items:center; }
+  .capture-column { width:17.154cqw; flex:none; display:flex; flex-direction:column; gap:1.615cqw; }
+  .capture-card { position:relative; width:100%; height:calc(var(--card-h) * .10091cqw); border-radius:.807cqw; overflow:hidden; }
+  .capture-card img { position:absolute; max-width:none; width:var(--w); height:var(--h); left:var(--x); top:var(--y); }
+  .capture-card img.cover { inset:0; width:100%; height:100%; object-fit:cover; }
+  .capture-selection { position:absolute; width:40.363%; height:83.2%; left:29.92%; top:8.4%; border:2px dashed #ff5a29; box-shadow:0 0 0 999px rgb(26 26 30 / 70%); }
+  .capture-cursor { position:absolute; left:66.96%; top:86.91%; width:9.068%; overflow:visible; }
+
+  .capture-toast { position:absolute; left:50%; bottom:3.23cqw; transform:translate(-50%,0); display:flex; align-items:center; gap:.807cqw; padding:.807cqw 1.615cqw; border-radius:1.21cqw; background:#f3f3f4; color:#242529; font:400 1.412cqw/1.57 "Google Sans",sans-serif; white-space:nowrap; opacity:0; }
+  .capture-toast span { color:#22a674; }
+  @media (prefers-reduced-motion:no-preference) {
+    .scene-running .capture-selection { animation:capture-selection 12s cubic-bezier(.77,0,.175,1) infinite; }
+    .scene-running .capture-cursor { animation:capture-cursor 12s cubic-bezier(.77,0,.175,1) infinite; }
+    .scene-running .capture-toast { animation:capture-toast 12s cubic-bezier(.23,1,.32,1) infinite; }
+  }
+  @keyframes capture-selection { 0%,15% {opacity:0; width:0; height:0} 19% {opacity:1; width:0; height:0} 48%,70% {opacity:1; width:40.363%; height:83.2%} 80%,100% {opacity:0; width:40.363%; height:83.2%} }
+  @keyframes capture-cursor { 0%,5% {opacity:0; transform:translate(-40cqw,-42cqw)} 15%,19% {opacity:1; transform:translate(-40cqw,-42cqw)} 48%,60% {opacity:1; transform:translate(0,0)} 68%,100% {opacity:0; transform:translate(2cqw,2cqw)} }
+  @keyframes capture-toast { 0%,57% {opacity:0; transform:translate(-50%,.8cqw)} 64%,82% {opacity:1; transform:translate(-50%,0)} 92%,100% {opacity:0; transform:translate(-50%,.8cqw)} }
+</style>

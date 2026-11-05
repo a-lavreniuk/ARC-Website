@@ -1,0 +1,209 @@
+---
+const { kind } = Astro.props;
+const extensionCards = [{"h":154,"ims":[{"src":"imgImageCard","y":null},{"src":"imgImageCard1","w":"394.32","h":"237.43","x":"-159.76","y":"-12.11"},{"src":"imgImageCard2","w":"607.31","h":"446.94","x":"-298.28","y":"-246.16"}]},{"h":214,"ims":[{"src":"imgImageCard3","y":null},{"src":"imgImageCard4","w":"493.94","h":"214.03","x":"-29.47","y":"-113.94"},{"src":"imgImageCard2","w":"607.31","h":"446.94","x":"-207.62","y":"-279.12"}]},{"h":170,"ims":[{"src":"imgImageCard2","w":"479.92","h":"248.36","x":"-1.47","y":"0"}]},{"h":219,"ims":[{"src":"imgImageCard2","w":"479.92","h":"248.36","x":"-1.47","y":"0"}]},{"h":154,"ims":[{"src":"imgImageCard2","w":"562.68","h":"414.1","x":"0.48","y":"-219.28"}]},{"h":154,"ims":[{"src":"imgImageCard2","w":"479.92","h":"248.36","x":"-1.47","y":"0"}]},{"h":154,"ims":[{"src":"imgImageCard2","w":"328.24","h":"241.56","x":"-73.32","y":"0"}]},{"h":214,"ims":[{"src":"imgImageCard4","w":"493.94","h":"214.03","x":"-196.97","y":"-5.15"},{"src":"imgImageCard2","w":"609.03","h":"315.18","x":"-251.65","y":"-3.88"}]},{"h":170,"ims":[{"src":"imgImageCard2","w":"479.92","h":"248.36","x":"-1.47","y":"0"}]},{"h":219,"ims":[{"src":"imgImageCard2","w":"479.92","h":"248.36","x":"-379.92","y":"0"}]},{"h":154,"ims":[{"src":"imgImageCard2","w":"607.31","h":"446.94","x":"-207.62","y":"-279.12"}]},{"h":154,"ims":[{"src":"imgImageCard2","w":"479.92","h":"248.36","x":"-1.47","y":"0"}]},{"h":154,"ims":[{"src":"imgImageCard2","w":"508.31","h":"374.08","x":"-321.96","y":"-193.38"}]},{"h":214,"ims":[{"src":"imgImageCard2","w":"764.17","h":"395.46","x":"-146.19","y":"-222.34"}]},{"h":170,"ims":[{"src":"imgImageCard2","w":"479.92","h":"248.36","x":"-1.47","y":"0"}]},{"h":219,"ims":[{"src":"imgImageCard6","w":"337.55","h":"142.92","x":"-173.11","y":"0"},{"src":"imgImageCard2","w":"543.3","h":"281.16","x":"-324.9","y":"0"}]},{"h":154,"ims":[{"src":"imgImageCard2","w":"645.15","h":"474.78","x":"-545.08","y":"-274.86"}]},{"h":154,"ims":[{"src":"imgImageCard2","w":"479.92","h":"248.36","x":"-1.47","y":"0"}]}];
+const nav = ['Общие','Горячие клавиши','Уведомления','Скриншоты','Автоимпорт','Расширение браузера','MCP сервер','Библиотека','Шаблон деталки','Умный поиск','Автотеги','Обновления'];
+const autoIcons = [0,1,2,3,4,5,6,7,null,8,9,10];
+---
+<div class:list={['collect-scene', kind]} role="img" aria-label={kind === 'auto' ? 'Настройка автоимпорта в ARC' : kind === 'extension' ? 'Расширение Save to ARC в браузере' : 'Импорт изображения в библиотеку ARC'}>
+{kind === 'auto' ? (
+  <div class="auto-layout">
+    <aside class="auto-sidebar">
+      {nav.map((name, i) => <>{[3,7,9,11].includes(i) && <div class="auto-separator"></div>}<div class:list={['auto-row', {active:i === 4}]}>{autoIcons[i] === null ? <span class="auto-template-icon" aria-hidden="true"><i></i><i></i><i></i></span> : <img src={`/images/collect/auto-${autoIcons[i]}.svg`} alt="" />}{name}</div></>)}
+    </aside>
+    <div class="auto-panel">
+      <p>Укажите папку на диске — ARC будет отслеживать её и автоматически добавлять новые изображения и видео в библиотеку в раздел «Без категории»</p>
+      <div class="toggle-row"><span class="toggle"><i></i></span>Включить автоимпорт</div>
+      <div class="folder-row"><span class="folder-button">Выбрать папку</span><span class="folder-path">D:\Downloads\Images\Auto import</span></div>
+    </div>
+  </div>
+  <div class="auto-shade"></div>
+  <img class="auto-cursor" src="/images/collect/screenshot-cursor.svg" alt="" aria-hidden="true" />
+  <div class="toast"><img class="auto-loader" src="/images/collect/auto-11.svg" alt="" /><span>Добавлены <span class="auto-count" aria-hidden="true"><span>1</span><span>4</span><span>8</span><span>12</span></span> из 24 карточек...</span><span class="toast-cancel">Отмена</span></div>
+) : kind === 'extension' ? (
+  <>
+    <div class="browser-chrome" aria-hidden="true">
+  <div class="browser-toolbar">
+    <div class="browser-address"><img src="/images/collect/imgStarStroke.svg" alt="" /></div>
+    <img class="browser-more" src="/images/collect/imgGroup43.svg" alt="" />
+    <div class="browser-extension"><img class="browser-extension-default" src="/images/arc-logo.svg" alt="" /><img class="browser-extension-hover" src="/images/collect/imgFrame178.svg" alt="" /></div>
+    <div class="browser-profile"></div>
+  </div>
+  <div class="browser-top">
+    <div class="browser-tab"><img class="browser-tab-shape" src="/images/collect/imgTabBackground.svg" alt="" /><img class="browser-favicon" src="/images/collect/imgFavIcon.png" alt="" /><img class="browser-close" src="/images/collect/imgVector19.svg" alt="" /></div>
+    <img class="browser-new-tab" src="/images/collect/imgPath445.svg" alt="" />
+  </div>
+</div>
+    <div class="extension-grid">
+  {Array.from({length:6}, (_, column) => <div class="extension-column">
+    {extensionCards.slice(column * 3, column * 3 + 3).map(card => <div class="extension-card" style={`--height:${card.h}`}>
+      {card.ims.map(im => <img src={`/images/collect/${im.src}.png`} alt="" class:list={[{cover: !im.w}]} style={im.w ? `--w:${im.w}%;--h:${im.h}%;--x:${im.x ?? 0}%;--y:${im.y ?? 0}%` : ''} />)}<span class="extension-widget" aria-hidden="true"><img src="/images/arc-logo.svg" alt="" /></span>
+    </div>)}
+  </div>)}
+</div>
+    <img class="extension-cursor" src="/images/collect/screenshot-cursor.svg" alt="" aria-hidden="true" />
+    <div class="extension-modal">
+      <header><div><p>Save to ARC</p><small>Подключение установлено</small></div><img src="/images/arc-logo.svg" alt="" /></header>
+      <div class="extension-copy"><p>Наведите курсор на медиафайл и нажмите на кнопку сохранения или используйте контекстное меню.</p><p>Файлы загружаются в очередь до 50 штук. При открытии ARC очередь автоматически добавляется в библиотеку.</p></div>
+      <div class="extension-copy"><p>Можно скачать доску Pinterest целиком, и файлы автоматически соберутся в коллекцию с тем же названием.</p><span class="button-brand">Скачать доску</span></div>
+      <footer><span class="button-muted">Скрыть на этом сайте</span><div><span class="button-outline">Закрыть</span><span class="button-brand">Открыть ARC</span></div></footer>
+    </div>
+  </>
+) : (
+  <>
+    <div class="import-window import-source"><div class="animal-grid">
+  <div class="animal-column"><div class="animal-card" style="--height:154;--w:691.76%;--h:509.09%;--x:-304.56%;--y:-281.17%"><img src="/images/collect/quick-atlas-2.png" alt="" /></div><div class="animal-card" style="--height:214;--w:503.82%;--h:260.73%;--x:10.44%;--y:-126.96%"><img src="/images/collect/quick-atlas-2.png" alt="" /></div><div class="animal-card" style="--height:170;--w:503.82%;--h:328%;--x:-109.56%;--y:-146.12%"><img src="/images/collect/quick-atlas-2.png" alt="" /></div></div>
+  <div class="animal-column"><div class="animal-card source-iguana" style="--height:219"><span class="source-image"></span></div><div class="animal-card" style="--height:154;--w:593.82%;--h:437.01%;--x:-378.53%;--y:-161.69%"><img src="/images/collect/quick-atlas-2.png" alt="" /></div><div class="animal-card" style="--height:214;--w:503.82%;--h:260.73%;--x:-109.56%;--y:-146.12%"><img src="/images/collect/quick-atlas-2.png" alt="" /></div></div>
+</div></div>
+    <div class="import-window import-target"><div class="import-navbar"><span class="active-tab"><span>Библиотека</span><span class="active-tab-split"><img src="/images/demo-icons/chevron-brand.svg" alt="" /></span></span><span>Коллекции</span><span>Мудборд</span></div><div class="import-search"><span class="import-search-active"><img src="/images/demo-icons/tag-active.svg" alt="" /></span><img src="/images/demo-icons/ai.svg" alt="" /><img src="/images/demo-icons/eyedropper.svg" alt="" /><img src="/images/demo-icons/image.svg" alt="" /></div><div class="quick-grid">
+      <div class="quick-column">
+        <div class="quick-card" style="--height:154"><img src="/images/collect/quick-atlas-0.png" alt="" style="--w:216.61%;--h:210.98%;--x:.12%;--y:0%" /></div>
+        <div class="quick-card" style="--height:275"><img src="/images/collect/quick-atlas-3.png" alt="" style="--w:410.39%;--h:223.85%;--x:-13.3%;--y:-12%" /></div>
+      </div>
+      <div class="quick-column">
+        <div class="quick-card" style="--height:154"><img src="/images/collect/quick-atlas-1.png" alt="" style="--w:447.33%;--h:435.71%;--x:-119.61%;--y:-211.69%" /></div>
+        <div class="quick-card" style="--height:154"><img src="/images/collect/quick-atlas-0.png" alt="" style="--w:216.61%;--h:210.98%;--x:-114.79%;--y:-111.04%" /></div>
+      </div>
+    </div><svg class="drop-border" viewBox="0 0 2528 1408" preserveAspectRatio="none" aria-hidden="true"><rect x="1" y="1" width="2526" height="1406" rx="8" fill="none" stroke="#ff5a29" stroke-width="2" stroke-dasharray="32 16" /></svg></div>
+    <div class="import-drag"></div><div class="import-success" aria-hidden="true"><span class="import-success-icon">✓</span><span>Изображение добавлено в библиотеку</span></div><img class="import-cursor" src="/images/collect/screenshot-cursor.svg" alt="" />
+  </>
+)}
+</div>
+<style>
+  .collect-scene { position:relative; aspect-ratio:991/500; width:100%; overflow:hidden; border:1px solid #2f3035; border-radius:16px; background:#202124; container-type:inline-size; color:#cdced4; font:400 1.412cqw/1.57 "Google Sans",sans-serif; }
+  .collect-scene p { margin:0; font:inherit; } .collect-scene img { display:block; }
+  .auto-layout, .extension-modal, .import-navbar { font:400 1.412cqw/1.57 "Google Sans",sans-serif; }
+  .auto-layout { position:absolute; top:3.229cqw; left:3.229cqw; width:93.643cqw; height:78.3cqw; display:flex; gap:.605cqw; color:#c1c2ca; }
+  .auto-sidebar,.auto-panel { border:1px solid #393a41; border-radius:.807cqw; background:#242529; }
+  .auto-sidebar { flex:none; width:24.924cqw; padding:1.615cqw; overflow:hidden; }
+  .auto-row { height:3.229cqw; display:flex; align-items:center; gap:.605cqw; padding:0 .807cqw; border-radius:.807cqw; white-space:nowrap; }
+  .auto-row img { width:1.615cqw; height:1.615cqw; flex:none; } .auto-row.active { background:#ff6b3e; color:#230f09; }
+  .auto-template-icon { position:relative; display:block; width:1.615cqw; height:1.615cqw; flex:none; }
+  .auto-template-icon i { position:absolute; border:1px solid #787988; border-radius:.202cqw; }
+  .auto-template-icon i:nth-child(1) { inset:6.25% 6.25% 56.25% 6.25%; }
+  .auto-template-icon i:nth-child(2) { inset:56.25% 43.75% 6.25% 6.25%; }
+  .auto-template-icon i:nth-child(3) { inset:56.25% 6.25% 6.25% 68.75%; }
+  .auto-separator { height:3.229cqw; margin:0 -1.615cqw; position:relative; }
+  .auto-separator::after { content:""; position:absolute; left:0; right:0; top:50%; border-top:1px solid #393a41; }
+  .auto-panel { flex:1; padding:3.229cqw; } .auto-panel p { max-width:100%; }
+  .toggle-row { display:flex; align-items:center; gap:.605cqw; margin-top:.807cqw; }
+  .toggle { width:1.615cqw; height:1.009cqw; border-radius:1cqw; background:#ff6b3e; display:flex; align-items:center; justify-content:flex-end; padding:0 .202cqw; }.toggle i { width:.807cqw; height:.605cqw; border-radius:1cqw; background:#230f09; }
+  .folder-row { display:flex; justify-content:space-between; align-items:center; margin-top:3.229cqw; }
+  .folder-button,.button-muted,.button-outline,.button-brand { display:inline-flex; align-items:center; border-radius:.8cqw; padding:.4cqw .8cqw; white-space:nowrap; }
+  .folder-button { background:#393a41; min-height:3.229cqw; } .button-muted { background:#36373e; } .folder-path { color:#6d6f7c; }
+  .auto-shade { position:absolute; bottom:0; left:0; right:0; height:12.916cqw; background:linear-gradient(to top,#1a1a1e 0%,rgb(26 26 30 / 30%) 50%,transparent 100%); pointer-events:none; }
+  .toast { font:400 1.412cqw/1.57 "Google Sans",sans-serif; position:absolute; bottom:3.229cqw; left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:.807cqw; background:#f3f3f4; color:#242529; border-radius:1.211cqw; padding:.807cqw .807cqw .807cqw 1.615cqw; white-space:nowrap; }
+  .auto-loader { width:1.615cqw; height:1.615cqw; } .toast-cancel { border:1px solid #dadadf; border-radius:.807cqw; padding:0 .807cqw; min-height:2.422cqw; display:flex; align-items:center; font-size:1.211cqw; line-height:1.615cqw; }
+  .browser-chrome { position:absolute; left:-38.08%; top:0; width:138.08%; height:185.4%; background:#1a1a1e; overflow:hidden; }
+  .browser-toolbar { position:absolute; left:6.458%; top:4.75%; width:93.542%; height:5.178%; background:#393a41; }
+  .browser-address { position:absolute; left:2.8125%; top:12.5%; width:85.625%; height:75%; border-radius:.807cqw; background:#242529; }
+  .browser-address img { position:absolute; width:1.615cqw; height:1.615cqw; right:1.009cqw; top:50%; transform:translateY(-50%); }
+  .browser-more { position:absolute; width:.404cqw; height:2.422cqw; left:97.89%; top:25%; }
+  .browser-extension { position:absolute; width:3.633cqw; height:3.633cqw; left:89.375%; top:12.5%; border-radius:.807cqw; background:#242529; }
+  .browser-extension img { position:absolute; }
+  .browser-extension-default { width:2.02cqw; height:2.02cqw; left:50%; top:50%; transform:translate(-50%,-50%); }
+  .browser-extension-hover { inset:0; width:3.633cqw; height:3.633cqw; opacity:0; }
+  .browser-profile { position:absolute; left:93.203%; top:12.5%; width:3.633cqw; height:3.633cqw; border-radius:.807cqw; background:#242529; }
+  .browser-top { position:absolute; left:0; top:0; width:100%; height:4.746%; background:#242529; overflow:hidden; }
+  .browser-tab { position:absolute; left:18.52%; top:27.27%; width:18.86%; height:72.73%; overflow:hidden; }
+  .browser-tab-shape { position:absolute; inset:0 0 0 3.49%; width:96.51%; height:100%; }
+  .browser-favicon { position:absolute; left:8.14%; top:28.125%; width:1.615cqw; height:1.615cqw; }
+  .browser-close { position:absolute; left:88.56%; top:35.94%; width:.908cqw; height:.908cqw; }
+  .browser-new-tab { position:absolute; left:37.56%; top:51.14%; width:1.009cqw; height:1.009cqw; transform:rotate(180deg) scaleX(-1); }
+  .extension-grid { position:absolute; top:12.51cqw; right:3.23cqw; display:flex; gap:1.615cqw; }
+.extension-column { display:flex; flex-direction:column; flex:none; width:17.15cqw; gap:1.615cqw; }
+.extension-card { position:relative; flex:none; width:100%; height:calc(var(--height) * .10091cqw); border-radius:.807cqw; overflow:hidden; background:#2f3035; }
+.extension-card img { position:absolute; width:var(--w); height:var(--h); left:var(--x); top:var(--y); max-width:none; }
+.extension-card img.cover { inset:0; width:100%; height:100%; object-fit:cover; }
+  .extension-modal { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:40.36%; height:41.98cqw; border:1px solid #44454d; border-radius:1.6cqw; background:#292a2f; box-shadow:0 1cqw 3.2cqw #0005; overflow:hidden; }
+  .extension-modal header { height:7.265cqw; display:flex; justify-content:space-between; padding:1.6cqw; border-bottom:1px solid #44454d; }.extension-modal header p { font-size:1.615cqw; }.extension-modal header small { color:#28c292; font-size:1.21cqw; }.extension-modal header img { width:3.2cqw; height:3.2cqw; }
+  .extension-copy { padding:1.6cqw; border-bottom:1px solid #44454d; } .extension-modal > .extension-copy:nth-child(2) { height:15.14cqw; } .extension-modal > .extension-copy:nth-child(3) { height:13.925cqw; }.extension-copy p+p { margin-top:.8cqw; }.extension-copy .button-brand { margin-top:1.6cqw; }
+  .extension-modal footer { height:5.65cqw; display:flex; justify-content:space-between; align-items:center; padding:1.6cqw; }.extension-modal footer div { display:flex; gap:.6cqw; }
+  .button-brand,.button-muted,.button-outline { font-size:1.21cqw; line-height:1.6cqw; }.button-brand { background:#ff6b3e; color:#37180e; }.button-outline { border:1px solid #44454d; }
+  .import-window { position:absolute; top:9.6%; height:168%; border:1px solid #36373e; border-radius:1.6cqw; overflow:hidden; background:#1a1a1e; }
+  .import-source { right:68.3%; width:52%; }
+  .import-target { left:36.7%; width:151.8%; background:#1a1a1e; border:1px solid #36373e; border-radius:1.21cqw; }.import-navbar { display:flex; align-items:center; gap:1.6cqw; margin:3.2cqw; width:max-content; padding:1.2cqw; border-radius:1.6cqw; background:#242529; }.active-tab { background:#ff6b3e; color:#37180e; border-radius:.8cqw; padding:.5cqw .8cqw; }
+  .iguana-grid { position:absolute; top:14%; left:3.2cqw; right:0; height:75%; background:url('/images/collect/import-iguanas.jpg') left top/65% auto repeat-y; }.drop-border { position:absolute; inset:1.6cqw; border:2px dashed #ff5a29; border-radius:1.6cqw; pointer-events:none; }
+  .import-drag { position:absolute; left:11.3%; top:8.07cqw; width:17.15cqw; height:22.1cqw; border:1px solid #ff5a29; border-radius:1.6cqw; background:#b85b32 url('/images/collect/import-iguana-drag.jpg') left center/400% auto; }.import-cursor { position:absolute; z-index:4; width:9.07%; max-width:none; left:14.3%; top:13.6cqw; opacity:0; }
+  .animal-grid { position:absolute; top:3.23cqw; right:3.23cqw; display:flex; gap:1.615cqw; }
+  .import-source::after { content:""; position:absolute; inset:0; background:rgb(26 26 30 / 50%); opacity:0; pointer-events:none; }
+  .source-iguana { background:#393a41; }
+  .source-image { position:absolute; inset:0; overflow:hidden; }
+  .source-image::after { content:""; position:absolute; width:457.37%; height:187.1%; left:-8.71%; top:-47.13%; background:url('/images/collect/quick-atlas-1.png') 0 0 / 100% 100%; }
+  .animal-column { width:17.15cqw; display:flex; flex-direction:column; gap:1.615cqw; }
+  .animal-card, .quick-card { position:relative; width:100%; height:calc(var(--height) * .10091cqw); border-radius:.807cqw; overflow:hidden; flex:none; }
+  .animal-card img, .quick-card img { position:absolute; width:var(--w); height:var(--h); left:var(--x); top:var(--y); max-width:none; }
+  .quick-grid { position:absolute; top:12.11cqw; left:3.23cqw; display:flex; gap:1.615cqw; }
+  .quick-column { width:27.75cqw; display:flex; flex-direction:column; gap:1.615cqw; }
+  .quick-card { border-radius:1.615cqw; }
+  .import-target::after { content:""; position:absolute; inset:0; background:rgb(239 68 68 / 14%); opacity:0; pointer-events:none; }
+  .import-navbar, .import-search { z-index:1; }
+  .import-navbar { gap:.807cqw; padding:1.21cqw; box-shadow:inset 0 -1px #44454d, inset 0 -8px 16px #ffffff0a; }
+  .import-navbar > span:not(.active-tab) { padding:.5cqw .807cqw; }
+  .active-tab { display:flex; align-items:center; padding:0 0 0 .807cqw; min-height:3.23cqw; }
+  .active-tab-split { display:flex; align-items:center; justify-content:center; width:1.615cqw; margin-left:.4cqw; border-left:1px solid #d64e29; height:2.22cqw; }
+  .active-tab-split img { width:1.21cqw; height:1.21cqw; }
+  .import-search { position:absolute; top:3.23cqw; left:55%; display:flex; align-items:center; gap:0; padding:1.21cqw; border-radius:1.615cqw; background:#242529; box-shadow:inset 0 -1px #44454d, inset 0 -8px 16px #ffffff0a; }
+  .import-search > img, .import-search-active { width:3.23cqw; height:3.23cqw; padding:.807cqw; }
+  .import-search-active { display:flex; align-items:center; justify-content:center; background:#ff6b3e; border-radius:.807cqw; }
+  .import-search-active img { width:1.615cqw; height:1.615cqw; }
+  .drop-border { z-index:2; border:0; opacity:0; width:calc(100% - 3.2cqw); height:calc(100% - 3.2cqw); }
+  .import-drag { z-index:3; background:#b85b32; overflow:hidden; opacity:0; border-radius:.807cqw; transform-origin:top left; }
+  .import-drag::after { content:""; position:absolute; width:457.37%; height:187.1%; left:-8.71%; top:-47.13%; background:url('/images/collect/quick-atlas-1.png') 0 0 / 100% 100%; }
+
+  .import-success { position:absolute; z-index:5; left:50%; bottom:3.23cqw; transform:translate(-50%,.8cqw); display:flex; align-items:center; gap:.807cqw; padding:.807cqw 1.615cqw; border:1px solid #0c4c3f; border-radius:1.21cqw; background:#0b3e34; color:#10a979; font:400 1.412cqw/1.57 "Google Sans",sans-serif; white-space:nowrap; opacity:0; pointer-events:none; }
+  .import-success-icon { display:grid; place-items:center; width:1.615cqw; height:1.615cqw; color:#10a979; }
+  .extension-widget { position:absolute; z-index:2; top:.807cqw; right:.807cqw; width:3.23cqw; height:3.23cqw; padding:.605cqw; background:#ff6b3e; border-radius:.807cqw; opacity:0; transform:scale(.95); transition:opacity 180ms ease, transform 180ms ease; }
+  .extension-card .extension-widget img { position:static; display:block; width:100%; height:100%; filter:brightness(0); }
+  .extension-card.widget-visible .extension-widget { opacity:1; transform:scale(1); }
+  .extension-cursor,.auto-cursor { position:absolute; width:9.07%; z-index:5; pointer-events:none; opacity:0; }
+  .extension-cursor { left:0; top:0; } .auto-cursor { left:33%; top:22%; }
+  .auto-count { display:inline-grid; } .auto-count > span { grid-area:1/1; visibility:hidden; } .auto-count > span:last-child { visibility:visible; }
+  @media (prefers-reduced-motion:no-preference) {
+    .scene-running.import .import-drag { animation:collect-import-card 12s cubic-bezier(.77,0,.175,1) infinite; }
+    .scene-running.import .import-cursor { animation:collect-import-cursor 12s cubic-bezier(.77,0,.175,1) infinite; }
+    .scene-running.import .quick-column:first-child { animation:collect-import-grid 12s cubic-bezier(.23,1,.32,1) infinite; }
+    .scene-running.import .import-success { animation:collect-import-success 12s cubic-bezier(.23,1,.32,1) infinite; }
+    .scene-running.import .import-target::after,.scene-running.import .drop-border,.scene-running.import .import-source::after { animation:collect-import-zone 12s ease infinite; }
+    .scene-running.import .source-image { animation:collect-import-source-card 12s steps(1,end) infinite; }
+    .scene-running.import .import-target { animation:collect-import-target-border 12s ease infinite; }
+    .scene-running.extension .browser-extension-hover { animation:extension-hover 12s ease infinite; }
+    .scene-running.extension .extension-cursor { animation:extension-pointer 12s cubic-bezier(.77,0,.175,1) infinite; }
+    .scene-running.extension .extension-modal { animation:extension-modal 12s cubic-bezier(.23,1,.32,1) infinite; }
+    .scene-running.auto .auto-cursor { animation:auto-pointer 12s cubic-bezier(.77,0,.175,1) infinite; }
+    .scene-running.auto .toggle { animation:auto-toggle 12s ease infinite; }
+    .scene-running.auto .toggle i { animation:auto-knob 12s cubic-bezier(.23,1,.32,1) infinite; }
+    .scene-running.auto .folder-path { animation:auto-path 12s ease infinite; }
+    .scene-running.auto .toast { animation:auto-toast 12s cubic-bezier(.23,1,.32,1) infinite; }
+    .scene-running.auto .auto-loader { animation:loader-spin 1.4s linear infinite; }
+    .scene-running.auto .auto-count > span { animation:auto-count 12s steps(1,end) infinite; }
+    .scene-running.auto .auto-count > span:nth-child(2) { animation-delay: .7s; }
+    .scene-running.auto .auto-count > span:nth-child(3) { animation-delay: 1.4s; }
+    .scene-running.auto .auto-count > span:nth-child(4) { animation:auto-count-last 12s steps(1,end) infinite; }
+  }
+  @keyframes collect-import-card { 0%,25% {opacity:0; transform:translate(0,0) scale(1); box-shadow:none} 27%,30% {opacity:1; transform:translate(0,0) scale(1.025); box-shadow:0 1.2cqw 2.4cqw #0008} 58%,62% {opacity:1; transform:translate(28.63cqw,8.88cqw) scale(1.618); box-shadow:0 1.2cqw 2.4cqw #0008} 70%,88% {opacity:1; transform:translate(28.63cqw,8.88cqw) scale(1.618); box-shadow:none} 96%,100% {opacity:0; transform:translate(28.63cqw,8.88cqw) scale(1.618); box-shadow:none} }
+  @keyframes collect-import-cursor { 0% {opacity:0; transform:translate(-8cqw,10cqw)} 8% {opacity:1; transform:translate(-8cqw,10cqw)} 22%,30% {opacity:1; transform:translate(0,0)} 58%,72% {opacity:1; transform:translate(32.4cqw,12.1cqw)} 80%,100% {opacity:0; transform:translate(34cqw,14cqw)} }
+  @keyframes collect-import-grid { 0%,60% {transform:translateY(0)} 70%,88% {transform:translateY(37.3cqw)} 96%,100% {transform:translateY(0)} }
+  @keyframes collect-import-zone { 0%,24% {opacity:0} 30%,68% {opacity:1} 75%,100% {opacity:0} }
+  @keyframes collect-import-success { 0%,69% {opacity:0; transform:translate(-50%,.8cqw)} 76%,88% {opacity:1; transform:translate(-50%,0)} 96%,100% {opacity:0; transform:translate(-50%,.8cqw)} }
+  @keyframes collect-import-source-card { 0%,25% {opacity:1} 26%,88% {opacity:0} 89%,100% {opacity:1} }
+  @keyframes collect-import-target-border { 0%,24% {border-color:#36373e} 30%,68% {border-color:#8d371e} 75%,100% {border-color:#36373e} }
+  @keyframes extension-hover { 0%,48% {opacity:0} 52%,88% {opacity:1} 97%,100% {opacity:0} }
+  @keyframes extension-pointer { 0% {opacity:0; transform:translate(1.6cqw,42.6cqw)} 7% {opacity:1; transform:translate(1.6cqw,42.6cqw)} 50%,58% {opacity:1; transform:translate(84.7cqw,4.5cqw)} 65%,100% {opacity:0; transform:translate(84.7cqw,4.5cqw)} }
+  @keyframes extension-modal { 0%,56% {opacity:0; transform:translate(-50%,-48%) scale(.97)} 62%,88% {opacity:1; transform:translate(-50%,-50%) scale(1)} 97%,100% {opacity:0; transform:translate(-50%,-48%) scale(.97)} }
+  @keyframes auto-pointer { 0%,5% {opacity:0; transform:translate(7cqw,8cqw)} 14%,22% {opacity:1; transform:translate(0,0)} 34%,43% {opacity:1; transform:translate(0,6cqw)} 52%,100% {opacity:0; transform:translate(2cqw,7cqw)} }
+  @keyframes auto-toggle { 0%,17% {background:#6d6f7c} 22%,90% {background:#ff6b3e} 100% {background:#6d6f7c} }
+  @keyframes auto-knob { 0%,17% {transform:translateX(-.5cqw)} 22%,90% {transform:translateX(0)} 100% {transform:translateX(-.5cqw)} }
+  @keyframes auto-path { 0%,39% {opacity:0} 47%,90% {opacity:1} 100% {opacity:0} }
+  @keyframes auto-toast { 0%,50% {opacity:0; transform:translate(-50%,.8cqw)} 57%,88% {opacity:1; transform:translate(-50%,0)} 96%,100% {opacity:0; transform:translate(-50%,.8cqw)} }
+  @keyframes loader-spin { to {transform:rotate(360deg)} }
+  @keyframes auto-count-last { 0%,73% {visibility:hidden} 74%,100% {visibility:visible} }
+  @keyframes auto-count { 0%,55% {visibility:hidden} 56%,61% {visibility:visible} 62%,100% {visibility:hidden} }
+
+  @media (max-width:767px) {
+    .import .import-source::after, .import .import-target::after, .import .drop-border { opacity:1; }
+    .import .import-target { border-color:#8d371e; }
+    .import .import-drag { opacity:1; left:24.4%; top:24.4%; width:19.4%; height:51.2%; border-radius:1.6cqw; }
+    .import .import-cursor { opacity:1; left:39.2%; top:68.9%; }
+    .extension .browser-extension-hover { opacity:1; }
+  }
+</style>

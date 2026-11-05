@@ -1,0 +1,11 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Left Icon">
+<g id="square">
+<path id="Rectangle 117" d="M7.5 13.5C4.67157 13.5 3.25736 13.5 2.37868 12.6213C1.5 11.7426 1.5 10.3284 1.5 7.5C1.5 4.67157 1.5 3.25736 2.37868 2.37868C3.25736 1.5 4.67157 1.5 7.5 1.5C10.3284 1.5 11.7426 1.5 12.6213 2.37868C13.5 3.25736 13.5 4.67157 13.5 7.5C13.5 10.3284 13.5 11.7426 12.6213 12.6213C11.7426 13.5 10.3284 13.5 7.5 13.5Z" stroke="#787988"/>
+</g>
+<path id="path445" d="M6.5 9.5H10.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" stroke="#787988"/>
+<path id="path445_2" d="M4.5 5.5H8.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" stroke="#787988"/>
+<path id="Ellipse 107" d="M10.5 5.5C10.5 6.05228 10.0523 6.5 9.5 6.5C8.94772 6.5 8.5 6.05228 8.5 5.5C8.5 4.94772 8.94772 4.5 9.5 4.5C10.0523 4.5 10.5 4.94772 10.5 5.5Z" stroke="#787988"/>
+<path id="Ellipse 108" d="M6.5 9.5C6.5 10.0523 6.05228 10.5 5.5 10.5C4.94772 10.5 4.5 10.0523 4.5 9.5C4.5 8.94772 4.94772 8.5 5.5 8.5C6.05228 8.5 6.5 8.94772 6.5 9.5Z" stroke="#787988"/>
+</g>
+</svg>

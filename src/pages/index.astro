@@ -1,10 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/sections/Hero.astro';
+import IntroText from '../components/sections/IntroText.astro';
+import Features from '../components/sections/Features.astro';
+import LandingDetails from '../components/sections/LandingDetails.astro';
 ---
 <BaseLayout title="ARC — библиотека визуальных референсов" description="Собирайте, организуйте и находите визуальные референсы в локальной библиотеке ARC для Windows.">
   <div class="site-shell">
-    <main id="top"><Hero /></main>
+    <main id="top"><Hero /><IntroText /><Features /><LandingDetails /></main>
   </div>
 </BaseLayout>
 

@@ -1,0 +1,258 @@
+---
+import graphic1 from '../../../public/images/features/feature-1.svg?raw';
+import graphic2 from '../../../public/images/features/feature-2.svg?raw';
+import graphic3 from '../../../public/images/features/feature-3.svg?raw';
+import graphic4 from '../../../public/images/features/feature-4.svg?raw';
+const graphics = [graphic1, graphic2, graphic3, graphic4];
+const features = [
+  { title: 'Собирайте и сохраняйте', body: 'Добавляйте материалы с диска, из браузера или с экрана. Сначала сохраните материал, а организовать его можно позже.' },
+  { title: 'Организуйте библиотеку', body: 'Метки, категории и коллекции помогают сохранять порядок по мере роста библиотеки.' },
+  { title: 'Находите нужное', body: 'Ищите по меткам, фильтрам, цвету, смыслу или похожему изображению. Несколько способов — один результат.' },
+  { title: 'Работайте с референсом', body: 'Настраивайте карточку под свои задачи, добавляйте информацию и аннотации. Держите референс под рукой во время работы.' }
+];
+---
+<section class="features" aria-label="Возможности ARC">
+  <div class="features__grid">
+    <div class="features__cards">{features.map((item, index) => <article class="features__card">
+      <div class="features__illustration" aria-hidden="true" set:html={graphics[index]}></div>
+      <div class="features__card-copy"><h2>{item.title.replace(' и ', ' и ').replace(' с ', ' с ')}</h2><p>{item.body}</p></div>
+    </article>)}</div>
+    <article class="features__local">
+      <h2>Вы сами выбираете, где хранить ваши файлы и как ими пользоваться</h2>
+      <div><p>Библиотека ARC хранится локально и не зависит от собственного облака или стороннего сервиса. Вы сами решаете, где она находится, как её организовать и с какими инструментами работать. Библиотеку можно хранить на любом удобном диске, переносить, копировать или использовать вместе с облачным хранилищем, если оно синхронизирует файлы с вашим устройством.</p><p>Ваши материалы остаются вашими и доступны независимо от ARC.</p></div>
+    </article>
+  </div>
+</section>
+<style>
+.features { padding:192px max(208px, calc((100% - 1504px) / 2)); border-bottom:1px solid #2f3035; }
+.features__grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:32px; }
+.features__cards { display:contents; }
+.features__card, .features__local { border:1px solid #2f3035; border-radius:16px; overflow:hidden; }
+.features__card { display:flex; flex-direction:column; }
+.features__illustration { display:block; width:100%; height:auto; aspect-ratio:1; }
+.features__card-copy { display:flex; flex-direction:column; gap:8px; padding:0 32px 32px; }
+.features h2,.features p { margin:0; }.features__card h2 { color:#f3f3f4; font:600 28px/28px "Google Sans",sans-serif; }
+.features__card p { color:#b4b5bf; font:400 16px/24px "Google Sans",sans-serif; }
+.features__local { grid-column:1/-1; display:grid; grid-template-columns:1fr 1fr; gap:32px; padding:32px; }
+.features__local h2 { font:600 48px/48px "Google Sans",sans-serif; color:#f3f3f4; }.features__local p { color:#b4b5bf; font:400 20px/28px "Google Sans",sans-serif; }.features__local p+p { margin-top:16px; }
+@media(max-width:1919px){.features{padding-inline:64px;}}
+@media(max-width:1279px){.features{padding-inline:62px;}.features__grid{gap:16px;}.features__card-copy{padding:0 24px 24px;}.features__local h2{font-size:36px;line-height:36px;}.features__local p{font-size:16px;line-height:24px;}}
+@media(max-width:1023px){.features{padding:80px 0;}.features__grid{display:flex;flex-direction:column;gap:48px;}.features__cards{display:flex;gap:16px;overflow-x:auto;scrollbar-width:none;padding:0 36px;}.features__cards::-webkit-scrollbar{display:none;}.features__card{flex:0 0 320px;}.features__local{margin:0 36px;display:flex;flex-direction:column;}.features__card-copy{padding:0 32px 32px;}}
+@media(max-width:767px){.features__cards{padding-inline:20px;}.features__card{flex-basis:320px;}.features__local{margin-inline:20px;}.features__local h2{font-size:28px;line-height:28px;}}
+</style>
+
+<style>
+@media(max-width:1023px) {
+  .features__card h2 { font-size:20px; line-height:20px; }
+  .features__card p { font-size:16px; line-height:24px; }
+  .features__local h2 { font-size:28px; line-height:28px; }
+  .features__local p { font-size:17px; line-height:24px; }
+  .features__cards { -webkit-overflow-scrolling:touch; touch-action:pan-x pan-y; overscroll-behavior-x:contain; }
+}
+@media(max-width:767px) {
+  .features__local { border:0; border-radius:0; padding:0; gap:16px; }
+}
+@media(max-width:539px) {
+  .features__card h2 { font-size:18px; line-height:18px; }
+  .features__card p { font-size:14px; line-height:20px; }
+  .features__local h2 { font-size:24px; line-height:24px; }
+  .features__local p { font-size:16px; line-height:22px; }
+}
+@media(max-width:1023px) and (pointer:fine) { .features__cards { cursor:grab; } .features__cards.is-dragging { cursor:grabbing; } }
+</style>
+<script>
+  document.querySelectorAll<HTMLElement>('.features__cards').forEach((list) => {
+    let start: number | null = null;
+    let offset = 0;
+    list.addEventListener('pointerdown', (event) => {
+      if (event.pointerType !== 'mouse' || event.button !== 0 || !window.matchMedia('(max-width:1023px)').matches) return;
+      start = event.clientX; offset = list.scrollLeft; list.setPointerCapture(event.pointerId); list.classList.add('is-dragging'); event.preventDefault();
+    });
+    list.addEventListener('pointermove', (event) => { if (start !== null) list.scrollLeft = offset - (event.clientX - start); });
+    const end = () => { start = null; list.classList.remove('is-dragging'); };
+    list.addEventListener('pointerup', end); list.addEventListener('pointercancel', end); list.addEventListener('lostpointercapture', end);
+  });
+</script>
+
+<style>
+@media (max-width:767px) {
+  .features { padding-bottom:96px; }
+  .features__grid { gap:48px; }
+  .features__cards { gap:12px; padding-inline:22px; }
+  .features__card { flex-basis:292px; border-radius:12px; }
+  .features__card-copy { padding:0 24px 24px; }
+  .features__local { margin-inline:22px; gap:12px; }
+  .features__local p + p { margin-top:0; }
+}
+@media (max-width:539px) {
+  .features { padding-bottom:80px; }
+  .features__grid { gap:40px; }
+  .features__cards { padding-inline:18px; }
+  .features__card { border-radius:8px; }
+  .features__card-copy { padding:0 20px 20px; }
+  .features__local { margin-inline:18px; }
+}
+@media (max-width:399px) {
+  .features__cards { padding-inline:20px; }
+  .features__card { flex-basis:320px; }
+  .features__local { margin-inline:20px; }
+}
+</style>
+
+<style>
+.features__illustration :global(svg) { display:block; width:100%; height:100%; }
+.features__illustration :global(path[stroke="#FF5A29"]),
+.features__illustration :global(path[stroke="#612817"]) { transform-box:fill-box; }
+</style>
+<script>
+  const motion = window.matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)');
+  document.querySelectorAll<HTMLElement>('.features__card').forEach((card, cardIndex) => {
+    const paths = Array.from(card.querySelectorAll<SVGElement>('svg path'));
+    if (cardIndex === 0) {
+      const svg = card.querySelector<SVGSVGElement>('svg');
+      const contour = paths.find(path => path.getAttribute('stroke') === '#44454D');
+      if (svg && contour) {
+        const ns = 'http://www.w3.org/2000/svg';
+        const defs = document.createElementNS(ns, 'defs');
+        const gradient = document.createElementNS(ns, 'linearGradient');
+        gradient.id = 'feature-stack-glow';
+        gradient.setAttribute('x1', '100%');
+        gradient.setAttribute('y1', '100%');
+        gradient.setAttribute('x2', '0%');
+        gradient.setAttribute('y2', '0%');
+        const bright = document.createElementNS(ns, 'stop');
+        bright.setAttribute('offset', '50%');
+        bright.setAttribute('stop-color', '#44454D');
+        const dark = document.createElementNS(ns, 'stop');
+        dark.setAttribute('offset', '0%');
+        dark.setAttribute('stop-color', '#44454D');
+        const trailing = document.createElementNS(ns, 'stop');
+        trailing.setAttribute('offset', '100%');
+        trailing.setAttribute('stop-color', '#44454D');
+        gradient.append(dark, bright, trailing);
+        (contour as SVGElement & { glowStops?: SVGStopElement[] }).glowStops = [dark, bright, trailing];
+        defs.append(gradient);
+        svg.prepend(defs);
+        contour.setAttribute('stroke', 'url(#feature-stack-glow)');
+
+      }
+    }
+    const highlighted = paths.filter(path => ['#FF5A29', '#612817'].includes(path.getAttribute('stroke') ?? ''));
+    let animations: Animation[] = [];
+
+    const move = (elements: SVGElement[], x: number, y: number) => {
+      elements.forEach(element => {
+        animations.push(element.animate(
+          [{ transform: 'translate(0px, 0px)' }, { transform: `translate(${x}px, ${y}px)` }, { transform: 'translate(0px, 0px)' }],
+          { duration: 2400, iterations: Infinity, easing: 'ease-in-out' }
+        ));
+      });
+    };
+
+    const stop = (restore: boolean) => {
+      const moving = animations.map(animation => {
+        const effect = animation.effect as KeyframeEffect;
+        const element = effect.target as SVGElement;
+        return { element, transform: getComputedStyle(element).transform, opacity: getComputedStyle(element).opacity };
+      });
+      animations.forEach(animation => animation.cancel());
+      animations = [];
+      if (restore && motion.matches) {
+        animations = moving.map(({ element, transform, opacity }) => element.animate(
+          [{ transform: transform === 'none' ? 'translate(0px, 0px)' : transform, opacity }, { transform: 'translate(0px, 0px)', opacity: 1 }],
+          { duration: 450, easing: 'cubic-bezier(.16,1,.3,1)' }
+        ));
+      }
+    };
+
+    card.addEventListener('mouseenter', () => {
+      if (!motion.matches) return;
+      stop(false);
+      if (cardIndex === 0) {
+        move(highlighted, 0, -20);
+
+      } else if (cardIndex === 1) {
+        move(highlighted, 0, -20);
+        paths.slice(0, 2).forEach(path => move([path], 0, -6));
+        paths.slice(4, 8).forEach((path, i) => move([path], 0, -5 - Math.floor(i / 2) * 6));
+        paths.slice(10, 12).forEach(path => move([path], 0, -15));
+      } else if (cardIndex === 2) {
+        move(highlighted, 0, -12);
+        paths.filter(path => path.getAttribute('stroke') === '#44454D').forEach(path => {
+          const bounds = path.getBBox();
+          const distance = Math.hypot(bounds.x + bounds.width / 2 - 176, bounds.y + bounds.height / 2 - 176);
+          const edge = path.nextElementSibling;
+          const parts = [path, ...(edge instanceof SVGElement && edge.getAttribute('stroke') === '#2F3035' ? [edge] : [])];
+          parts.forEach(part => animations.push(part.animate(
+            [{ transform: 'translateY(0)' }, { transform: 'translateY(-3px)', offset: .25 }, { transform: 'translateY(0)', offset: .5 }, { transform: 'translateY(0)' }],
+            { duration: 2400, delay: Math.min(700, distance * 2), iterations: Infinity, easing: 'ease-in-out' }
+          )));
+        });
+        paths.filter(path => path.getAttribute('stroke') === '#44454D').forEach((path, i) => {
+          animations.push(path.animate(
+            [{ stroke: '#44454D' }, { stroke: '#777880', offset: .22 }, { stroke: '#44454D', offset: .44 }, { stroke: '#44454D' }],
+            { duration: 2400, delay: (i % 8) * 90, iterations: Infinity, easing: 'ease-in-out' }
+          ));
+        });
+      } else {
+        move(highlighted, 0, -20);
+        [[2, 7], [4, 12], [8, 12], [10, 7]].forEach(([index, distance]) => {
+          move(paths.slice(index, index + 2), 0, -distance);
+        });
+      }
+      if (cardIndex === 0) {
+        const stops = (paths[0] as SVGElement & { glowStops?: SVGStopElement[] }).glowStops;
+        if (stops) {
+          stops.forEach((stop, index) => animations.push(stop.animate(
+            [{ stopColor: '#44454D' }, { stopColor: '#777880', offset: .2 }, { stopColor: '#44454D', offset: .4 }, { stopColor: '#44454D' }],
+            { duration: 2400, delay: index * 320, iterations: Infinity, easing: 'ease-in-out' }
+          )));
+        }
+      }
+      if (cardIndex !== 2) {
+        paths.filter(path => path.getAttribute('stroke') === '#44454D').forEach((path, i) => {
+          const original = path.getAttribute('stroke') ?? '#44454D';
+          animations.push(path.animate(
+            [{ stroke: original }, { stroke: '#777880', offset: .22 }, { stroke: original, offset: .44 }, { stroke: original }],
+            { duration: 2400, delay: (i % 8) * 90, iterations: Infinity, easing: 'ease-in-out' }
+          ));
+        });
+      }
+    });
+    card.addEventListener('mouseleave', () => stop(true));
+    motion.addEventListener('change', () => { if (!motion.matches) stop(false); });
+  });
+</script>
+<style>
+@media (prefers-reduced-motion: no-preference) {
+  .features__card:global(.feature-reveal-pending), .features__local:global(.feature-reveal-pending) { opacity: 0; translate: 0 18px; transition: opacity 550ms ease-out, translate 550ms cubic-bezier(.2,.7,.2,1); }
+  .features__card:global(.feature-reveal-visible), .features__local:global(.feature-reveal-visible) { opacity: 1; translate: 0 0; transition-delay: var(--feature-delay, 0ms); }
+  @media (max-width: 1023px) { .features__card:global(.feature-reveal-pending), .features__local:global(.feature-reveal-pending) { translate: 0 8px; } .features__card:global(.feature-reveal-visible), .features__local:global(.feature-reveal-visible) { translate: 0 0; transition-delay: 0ms; } }
+}
+</style>
+<script>
+  const revealMotion = window.matchMedia('(prefers-reduced-motion: no-preference)');
+  const featureCards = Array.from(document.querySelectorAll<HTMLElement>('.features__card'));
+  const localFeature = document.querySelector<HTMLElement>('.features__local');
+  if (revealMotion.matches && 'IntersectionObserver' in window) {
+    const reveal = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('feature-reveal-visible');
+        reveal.unobserve(entry.target);
+      }
+    }), { threshold: .15, rootMargin: '0px 0px -20% 0px' });
+    [...featureCards, ...(localFeature ? [localFeature] : [])].forEach((element, index) => {
+      if (element.getBoundingClientRect().top >= window.innerHeight) {
+        element.style.setProperty('--feature-delay', index < featureCards.length ? `${index * 100}ms` : '0ms');
+        element.classList.add('feature-reveal-pending');
+        reveal.observe(element);
+      }
+    });
+    revealMotion.addEventListener('change', () => {
+      if (!revealMotion.matches) {
+        reveal.disconnect();
+        document.querySelectorAll('.feature-reveal-pending').forEach(element => element.classList.remove('feature-reveal-pending'));
+      }
+    });
+  }
+</script>

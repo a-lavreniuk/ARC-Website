@@ -7,10 +7,10 @@ import '../demos/arc-chips.css';
   <div class="hero__glow" aria-hidden="true"></div>
   <div class="hero__intro">
     <a class="hero__logo" href="#top" aria-label="ARC — на главную"><img class="brand-mark brand-mark--large" src="/images/arc-logo-hero.svg" alt="" /></a>
-    <h1 id="hero-title" class="type-heading-xxl hero__title">Референсы в одном месте —<br class="desktop-break" /> на вашем компьютере</h1>
-    <p class="type-paragraph-xl hero__description">Локальная библиотека референсов для дизайнеров и художников. Собирайте, организуйте и находите нужное без облака, даже когда материалов становится всё больше.</p>
-    <button class="button button--hero hero__cta" type="button"><span class="button--hero__fill" aria-hidden="true"></span><span class="button--hero__fill button--hero__fill--dark" aria-hidden="true"></span><span class="button--hero__text">Записаться на бета-тест</span></button>
-    <p class="type-paragraph-s hero__note" id="release-note">Ранний доступ для Windows уже открыт. Версия для Mac появится позже.</p>
+    <h1 id="hero-title" class="type-heading-xxl hero__title">Референсы в&nbsp;одном месте —<br class="desktop-break" /> на&nbsp;вашем компьютере</h1>
+    <p class="type-paragraph-xl hero__description">Локальная библиотека референсов для&nbsp;дизайнеров и художников. Собирайте, организуйте и находите нужное без&nbsp;облака, даже когда материалов становится всё больше.</p>
+    <button class="button button--hero hero__cta" type="button"><span class="button--hero__background" aria-hidden="true"><span class="button--hero__fill"></span><span class="button--hero__fill button--hero__fill--dark"></span></span><span class="button--hero__inner" data-text="Записаться на&nbsp;бета-тест"><span class="button--hero__text">Записаться на&nbsp;бета-тест</span></span></button>
+    <p class="type-paragraph-s hero__note" id="release-note">Ранний доступ для&nbsp;Windows уже открыт. Версия для&nbsp;Mac появится позже.</p>
   </div>
   <div class="hero__demo" id="demo"><LibraryPreview /></div>
 </section>
@@ -24,3 +24,14 @@ import '../demos/arc-chips.css';
 
 
 
+
+<style>
+@media (prefers-reduced-motion: no-preference) {
+  .hero__logo, .hero__title, .hero__description, .hero__cta, .hero__note, .hero__demo { animation: hero-arrive 650ms cubic-bezier(.2,.7,.2,1) both; }
+  .hero__title { animation-delay: 100ms; }
+  .hero__description, .hero__cta, .hero__note { animation-delay: 200ms; }
+  .hero__demo { animation-delay: 300ms; }
+  @keyframes hero-arrive { from { opacity: 0; translate: 0 14px; } to { opacity: 1; translate: 0 0; } }
+  @media (max-width: 767px) { @keyframes hero-arrive { from { opacity: 0; translate: 0 7px; } to { opacity: 1; translate: 0 0; } } }
+}
+</style>

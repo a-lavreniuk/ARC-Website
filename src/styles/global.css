@@ -6,7 +6,7 @@
   color-scheme: dark;
   font-family: "Google Sans", Arial, sans-serif;
   font-synthesis: none;
-  --page: #111113;
+  --page: #1a1a1e;
   --surface: #1a1a1e;
   --surface-raised: #242429;
   --line: rgb(243 243 244 / 10%);
@@ -358,12 +358,12 @@ html::-webkit-scrollbar { width:0; height:0; }
 @media (max-width:640px) { .hero__demo .arc-demo { overflow:clip; } }
 /* Color-swoosh: two angled fills sweep upward behind the label. */
 .button--hero { position:relative; isolation:isolate; overflow:hidden; background:#f3f3f4; color:#1a1a1e; transition:color .2s ease-out; }
-.button--hero__fill { position:absolute; z-index:-1; inset:-35% -15%; background:#ff5a29; transform:translateY(115%) rotate(-12deg); transition:transform .6s cubic-bezier(.32,.72,0,1); pointer-events:none; }
+.button--hero__fill { position:absolute; z-index:-1; inset:-35% -15%; background:#ff5a29;  transition:transform .6s cubic-bezier(.32,.72,0,1); pointer-events:none; }
 .button--hero__fill--dark { background:#1a1a1e; transition-delay:0s; }
 .button--hero__text { position:relative; }
 @media (hover:hover) and (pointer:fine) {
   .button--hero:is(:hover,:focus-visible) { background:#f3f3f4; color:#f3f3f4; }
-  .button--hero:is(:hover,:focus-visible) .button--hero__fill { transform:translateY(0) rotate(0); }
+  .button--hero:is(:hover,:focus-visible) .button--hero__fill {  }
   .button--hero:is(:hover,:focus-visible) .button--hero__fill--dark { transition-delay:.064s; }
 }
 @media (prefers-reduced-motion:reduce) {
@@ -388,3 +388,56 @@ html::-webkit-scrollbar { width:0; height:0; }
   .button--hero__fill { display:none; }
   .button--hero, .button--hero:hover { background:#f3f3f4; color:#1a1a1e; }
 }
+/* Color-Swoosh reference: layered fill and independently animated label. */
+.button--hero {
+  --swoosh-ease:cubic-bezier(.32,.72,0,1);
+  --swoosh-elastic:linear(0,.5737 7.6%,.8382 11.87%,.9463 14.19%,1.0292 16.54%,1.0886 18.97%,1.1258 21.53%,1.137 22.97%,1.1424 24.48%,1.1423 26.1%,1.1366 27.86%,1.1165 31.01%,1.0507 38.62%,1.0219 42.57%,.9995 46.99%,.9872 51.63%,.9842 58.77%,1.0011 81.26%,1);
+  display:grid; grid-template-areas:"stack"; place-items:stretch; padding:0; overflow:visible; background:transparent; color:#1a1a1e; border:0;
+  transition:transform .45s var(--swoosh-elastic);
+}
+.button--hero:active { scale:none; transform:scale(.955,.954); }
+.button--hero__background { grid-area:stack; display:grid; overflow:clip; border-radius:12px; background:#f3f3f4; transition:scale .45s var(--swoosh-ease),background-color .2s ease-out; }
+.button--hero__fill { grid-area:1 / 1; position:static; z-index:auto; width:120%; height:100%; inset:auto; background:#ff5a29; translate:-10% 100%; rotate:-12deg; transform-origin:top right; transition:translate .6s var(--swoosh-ease),rotate .5s var(--swoosh-ease); pointer-events:none; }
+.button--hero__fill--dark { background:#1a1a1e; transition-delay:-.042s; }
+.button--hero__inner { grid-area:stack; display:grid; place-items:center; overflow:clip; padding:9px 16px; }
+.button--hero__text, .button--hero__inner::after { grid-area:1 / 1; transition:translate .75s var(--swoosh-elastic),rotate .5s var(--swoosh-ease),opacity .2s ease-out; transform-origin:top right; }
+.button--hero__inner::after { content:attr(data-text); color:#f3f3f4; translate:0 2em; rotate:1 1 .5 -30deg; }
+@media (hover:hover) and (pointer:fine) {
+  .button--hero:is(:hover,:focus-visible) { background:transparent; color:#1a1a1e; }
+  .button--hero:is(:hover,:focus-visible) .button--hero__background { scale:1.065 1.095; }
+  .button--hero:is(:hover,:focus-visible) .button--hero__fill { translate:-10% 0; rotate:0deg; transition-delay:0s; }
+  .button--hero:is(:hover,:focus-visible) .button--hero__fill--dark { transition-delay:.064s; }
+  .button--hero:is(:hover,:focus-visible) .button--hero__text { rotate:1 1 .45 -60deg; translate:0 -2em; opacity:0; }
+  .button--hero:is(:hover,:focus-visible) .button--hero__inner::after { rotate:1 1 .45 0deg; translate:0 0; opacity:1; transition-delay:.1s; }
+}
+@media (hover:none), (pointer:coarse) {
+  .button--hero,.button--hero:hover { background:transparent; color:#1a1a1e; }
+  .button--hero__fill { display:none; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .button--hero,.button--hero__background,.button--hero__fill,.button--hero__text,.button--hero__inner::after { transition:none; }
+}
+
+
+
+/* Mobile demo scrolls as one window; its inner controls remain inert. */
+@media (max-width:640px) {
+  .hero__demo { overflow-x:auto; overflow-y:hidden; -webkit-overflow-scrolling:touch; touch-action:pan-x pan-y; }
+  .hero__demo .arc-demo { touch-action:pan-x pan-y; }
+  .button--hero, .button--hero:hover, .button--hero:active { transform:none; scale:none; background:transparent; color:#1a1a1e; }
+  .button--hero__background, .button--hero:hover .button--hero__background { scale:1; }
+  .button--hero__fill { display:none; }
+  .button--hero__text, .button--hero:hover .button--hero__text { translate:none; rotate:none; opacity:1; }
+  .button--hero__inner::after, .button--hero:hover .button--hero__inner::after { display:none; }
+}
+
+@media (max-width:640px) { .hero__cta .button--hero__background { width:100%; height:100%; } }
+
+@media (max-width:640px) { .hero__cta { grid-template-columns:minmax(0,1fr); } }
+
+/* The entire mobile preview is a single scrollable window. */
+@media (max-width:640px) {
+  .hero__demo .arc-demo { pointer-events:none; }
+}
+
+@media (max-width:640px) and (pointer:fine) { .hero__demo { cursor:grab; } .hero__demo.is-dragging { cursor:grabbing; } }

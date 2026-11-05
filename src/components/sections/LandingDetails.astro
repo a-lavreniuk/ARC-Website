@@ -1,0 +1,614 @@
+---
+import CollectScreenshot from './CollectScreenshot.astro';
+import CollectScenes from './CollectScenes.astro';
+const { groups, faq } = {
+  "groups": [
+    {
+      "title": "Соберите референсы без лишних шагов",
+      "desc": "Добавляйте изображения и видео с диска, из браузера или прямо с экрана. Перетащите отдельный файл или целую папку, сделайте скриншот или настройте автоимпорт. Из Pinterest можно забрать доску целиком, из Instagram — сохранённую подборку. Не нужно заранее продумывать структуру библиотеки — сначала сохраните материал, а порядок наведёте позже с помощью меток и коллекций.",
+      "items": [
+        {
+          "title": "Быстрый импорт",
+          "body": "Перенесите материал или целую папку в ARC — всё сразу появится в библиотеке. Не нужно заранее создавать папки и продумывать структуру: сначала сохраните материал, а организовать его можно позже.",
+          "src": "/images/landing/2518-22936.jpg"
+        },
+        {
+          "title": "Сохраняйте из браузера",
+          "body": "Добавляйте материалы со страниц прямо в библиотеку, не скачивая их вручную. Сохраняйте отдельные материалы или целые подборки из Pinterest, Instagram, ArtStation.",
+          "src": "/images/landing/2518-23028.jpg"
+        },
+        {
+          "title": "Сохраняйте с экрана",
+          "body": "Захватывайте нужную область, отдельное окно или весь экран и сразу добавляйте результат в библиотеку. Удобно сохранять идею в тот момент, когда она появилась, не прерывая работу.",
+          "src": "/images/landing/2518-23100.jpg"
+        },
+        {
+          "title": "Папка автоимпорта",
+          "body": "Назначьте папку на диске, и ARC будет автоматически добавлять новые материалы в библиотеку. Можно складывать туда файлы по мере работы и разбирать их уже внутри ARC.",
+          "src": "/images/landing/2518-23139.jpg"
+        }
+      ]
+    },
+    {
+      "title": "Наведите порядок так, как вам удобно",
+      "desc": "Организуйте библиотеку так, как удобно вам: используйте метки, коллекции, разделы и мудборды. Не нужно заранее придумывать идеальную структуру — начинайте с простого и добавляйте порядок по мере того, как библиотека растёт. Для разных проектов можно создавать отдельные библиотеки и быстро переключаться между ними.",
+      "items": [
+        {
+          "title": "Категории и метки",
+          "body": "Отмечайте материалы по смыслу, проекту, стилю или технике — так, как вы сами о них думаете. Метки объединяются в категории и выстраиваются в иерархию, а синонимы помогают найти нужное, даже если точное слово забылось. Структура складывается по ходу работы, а не заранее.",
+          "src": "/images/landing/2384-43179.jpg"
+        },
+        {
+          "title": "Коллекции",
+          "body": "Собирайте подборки под задачу, бриф, клиента или этап работы. Коллекции можно вкладывать друг в друга, а разделы внутри помогают держать материалы в нужном контексте. Начните с одной подборки и добавляйте уровни, только когда их действительно станет не хватать.",
+          "src": "/images/landing/2419-46068.jpg"
+        },
+        {
+          "title": "Мудборд",
+          "body": "Когда подборке тесно в сетке, разложите референсы на свободном поле. Мудборд держит всё нужное перед глазами одновременно: располагайте изображения как удобно и собирайте настроение проекта целиком. Строгая структура не обязательна — порядок здесь задаёте вы.",
+          "src": "/images/landing/2419-47395.jpg"
+        },
+        {
+          "title": "Библиотеки",
+          "body": "Разделяйте работу на отдельные библиотеки: под проекты, клиентов или разные направления. Каждая хранится в своей папке на диске, а переключиться между ними можно в любой момент прямо из шапки приложения. Начните с одной библиотеки и добавляйте новые по мере роста.",
+          "src": "/images/landing/2419-47682.jpg"
+        }
+      ]
+    },
+    {
+      "title": "Найдите то самое изображение в большой библиотеке",
+      "desc": "Когда материалов становится много, не всегда помнишь название файла или метку, под которой сохранил референс. Поэтому ARC позволяет искать разными способами: по меткам, фильтрам, смыслу, цвету или визуальному сходству. Ищите так, как проще для конкретной задачи.",
+      "items": [
+        {
+          "title": "Категории и метки",
+          "body": "Присваивайте референсам метки и используйте их для быстрого поиска. Выберите нужную метку или несколько меток, чтобы сразу получить соответствующую подборку материалов.",
+          "src": "/images/landing/2035-5356.jpg"
+        },
+        {
+          "title": "Поиск по смыслу",
+          "body": "Опишите, что ищете, обычными словами. Локальный AI найдёт изображения по их содержанию и тексту на них, а не только по имени файла или меткам.",
+          "src": "/images/landing/2035-5358.jpg"
+        },
+        {
+          "title": "Поиск по цвету",
+          "body": "Ищите референсы по цветовой гамме, указывайте нужные оттенки или Pantone. Можно взять цвет прямо с экрана с помощью пипетки.",
+          "src": "/images/landing/2035-5361.jpg"
+        },
+        {
+          "title": "Похожие изображения",
+          "body": "Добавьте изображение-пример, и ARC найдёт визуально похожие материалы в вашей библиотеке.",
+          "src": "/images/landing/2035-5360.jpg"
+        }
+      ]
+    },
+    {
+      "title": "Смотрите материалы без лишних окон",
+      "desc": "Откройте референс и работайте с ним, не переключаясь между приложениями. Увеличивайте изображение, смотрите метаданные, добавляйте заметки и аннотации, редактируйте информацию о материале или выводите его на второй монитор.",
+      "items": [
+        {
+          "title": "Детальный просмотр",
+          "body": "Откройте референс и работайте с ним, не переключаясь между приложениями. Увеличивайте изображение, смотрите метаданные файла и палитру, правьте название, описание и метки прямо в карточке — всё, что нужно знать о материале, собрано в одном месте.",
+          "src": "/images/landing/2442-7355.jpg"
+        },
+        {
+          "title": "Кастомный шаблон",
+          "body": "Настройте карточку под свой процесс: добавьте собственные поля — текст, ссылки, даты или списки — и решите, какие из них видны всегда, а какие скрыты. Шаблон настраивается один раз и применяется к новым материалам, а вся информация остаётся в карточке, а не в отдельных заметках.",
+          "src": "/images/landing/2442-8076.jpg"
+        },
+        {
+          "title": "Аннотации",
+          "body": "Делайте пометки прямо поверх изображения или видео: выделите область и запишите мысль рядом с ней. Все аннотации собираются в боковой панели с датой, так что к идее легко вернуться позже. Комментарии живут на самом референсе — не нужно вести их в отдельном файле.",
+          "src": "/images/landing/2442-8900.jpg"
+        },
+        {
+          "title": "Отдельное окно",
+          "body": "Вынесите референс в отдельное окно и поставьте его рядом с рабочим приложением или на второй монитор. Изображение можно повернуть, отразить или перевести в чёрно-белый режим, чтобы проверить тон. Референс всегда перед глазами — без переключения между программами.",
+          "src": "/images/landing/2442-9475.jpg"
+        }
+      ]
+    },
+    {
+      "title": "Инструменты для более глубокой работы",
+      "desc": "Основные сценарии ARC просты: соберите материалы, организуйте библиотеку и найдите нужное. А когда коллекция растёт или появляются более сложные задачи, можно подключить дополнительные инструменты — от локального AI до поиска дубликатов и интеграции с AI-агентами.",
+      "items": [
+        {
+          "title": "Поиск дубликатов",
+          "body": "Находите дубликаты и визуально похожие изображения, чтобы удалять лишние копии и поддерживать библиотеку в порядке.",
+          "src": "/images/landing/2198-8204.jpg"
+        },
+        {
+          "title": "Локальный AI",
+          "body": "ARC использует AI не как внешний сервис, а как часть самой библиотеки. При индексации каждый материал получает собственный цифровой «отпечаток» содержания, который позволяет системе сопоставлять его с поисковым запросом. Поэтому поиск работает не только с названиями и метками, но и с тем, что изображено в материале.\n\nВсе вычисления выполняются локально. Библиотеку не нужно загружать на удалённые серверы, чтобы использовать AI-поиск. Модели можно установить отдельно и выбрать подходящий вариант в зависимости от возможностей вашего устройства.\n\nДля AI-поиска и обработки материалов ARC использует CLIP, Qwen 3 и JoyCaption. Доступные модели и их сочетание зависят от выбранного режима.",
+          "src": "/images/landing/2198-8206.jpg"
+        },
+        {
+          "title": "Авто-тегирование",
+          "body": "ARC анализирует изображения и кадры видео и предлагает подходящие метки. Вы можете принять их, изменить или добавить свои.",
+          "src": "/images/landing/2198-8205.jpg"
+        },
+        {
+          "title": "Статистика",
+          "body": "Смотрите количество карточек, изображений и видео, занятое место и используемые метки.",
+          "src": "/images/landing/2198-8207.jpg"
+        },
+        {
+          "title": "MCP для агентов",
+          "body": "Подключайте Cursor, Claude Desktop и другие приложения с поддержкой MCP. AI-агенты смогут взаимодействовать с вашей библиотекой ARC и выполнять доступные действия через MCP.",
+          "src": "/images/landing/2198-8203.jpg"
+        }
+      ]
+    }
+  ],
+  "faq": [
+    [
+      "Что такое ранний доступ?",
+      "ARC уже можно устанавливать и использовать, но разработка продолжается. Функции и интерфейс могут меняться, а новые возможности — появляться по мере развития проекта."
+    ],
+    [
+      "Где хранятся мои данные?",
+      "Библиотека хранится локально на вашем компьютере, в выбранном вами месте. Файлы и метаданные не нужно загружать в облако для работы с ARC."
+    ],
+    [
+      "Нужен ли интернет?",
+      "Для обычной работы с библиотекой интернет не нужен. Он может понадобиться для обновлений, установки AI-моделей и работы отдельных функций, например браузерного расширения."
+    ],
+    [
+      "Как попасть в бета-тест?",
+      "Нажмите «Записаться на бета-тест» и оставьте заявку. После проверки заявки мы вручную пригласим вас в бета-тест."
+    ],
+    [
+      "Где читать документацию?",
+      "В базе знаний ARC собраны инструкции по интерфейсу, настройкам и основным сценариям работы."
+    ],
+    [
+      "Где следить за новостями?",
+      "Новости проекта и дневник разработки публикуем в Telegram-канале."
+    ],
+    [
+      "Есть ли версия для Mac?",
+      "Сейчас ARC доступен для Windows. Версия для Mac появится позже — следите за новостями проекта."
+    ],
+    [
+      "AI работает в облаке?",
+      "AI-функции ARC работают локально на вашем компьютере. Библиотеку не нужно загружать во внешний сервис для анализа и поиска по содержанию."
+    ],
+    [
+      "Что будет с файлами, если я удалю ARC?",
+      "Файлы находятся в папке библиотеки на вашем диске. Удаление приложения не удаляет эту папку. При необходимости вы можете самостоятельно скопировать или архивировать её обычными средствами."
+    ],
+    [
+      "Какие форматы поддерживаются?",
+      "Сейчас ARC работает с основными изображениями и видео, а поддержка сложных форматов вроде PSD, TIFF и RAW пока отсутствует. Если она появится, информация будет опубликована отдельно."
+    ]
+  ]
+};
+const sectionIds = ['collect', 'organize', 'search', 'view', 'more'];
+
+---
+{groups.map(({title, desc, items}, section) => (
+  <section class:list={['landing-section', sectionIds[section]]} id={sectionIds[section]} data-examples={section === 1 || section === 3 ? "" : undefined} aria-labelledby={sectionIds[section] + '-title'}>
+    <div class="section-inner">
+      <header class="section-heading">
+        <h2 id={sectionIds[section] + '-title'}>{section === 1 ? <>Наведите порядок так,<br />как вам удобно</> : title}</h2>
+        <div class="section-summary">
+          {section === 1 || section === 3 ? (
+            <>
+              <div class="example-tabs" role="group" aria-label={title}>
+                {items.map((item, index) => (
+                  <button type="button" data-example={index} aria-pressed={index === 0} aria-controls={sectionIds[section] + '-example-' + index}>
+                    {item.title}<span class="tab-progress" aria-hidden="true"></span>
+                  </button>
+                ))}
+              </div>
+              <div class="example-descriptions">
+                {items.map((item, index) => <p data-example-description hidden={index !== 0}>{item.body}</p>)}
+              </div>
+            </>
+          ) : <p>{desc}</p>}
+        </div>
+      </header>
+      {section === 1 || section === 3 ? (
+        <div class="examples">
+          <div class="examples-scroll">
+            {items.map((item, index) => (
+              <figure id={sectionIds[section] + '-example-' + index} data-example-panel hidden={index !== 0}>
+                <img src={item.src} alt={item.title + ' в ARC'} width="1504" height="700" loading="lazy" decoding="async" />
+              </figure>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div class:list={['cards', section === 0 ? 'stack' : 'bento']}>
+          {items.map((item, index) => (
+            <article class="example-card" style={`--step:${index}`}>
+              {section === 0 ? <div class="scene-viewport" tabindex="0" aria-label={`Просмотр: ${item.title}`}><div class="scene-viewport__content">{index === 2 ? <CollectScreenshot /> : <CollectScenes kind={['import', 'extension', 'screenshot', 'auto'][index]} />}</div></div> : <img src={item.src} alt={item.title + ' в ARC'} loading="lazy" decoding="async" />}
+              <div class="card-copy">
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+))}
+<section class="landing-section" id="faq" aria-labelledby="faq-title">
+  <div class="section-inner">
+    <header class="section-heading">
+      <h2 id="faq-title">Остались вопросы?</h2>
+      <p>Здесь собрали ответы на основные вопросы о ARC, его возможностях и работе с библиотекой. Если что-то осталось непонятно, <span class="faq-contact">напишите нам</span></p>
+    </header>
+    <div class="faq-list">
+      {faq.map(([question, answer]) => <article><h3>{question}</h3><p>{answer}</p></article>)}
+    </div>
+  </div>
+</section>
+<footer class="landing-section" id="footer">
+  <div class="section-inner">
+    <div class="closing">
+      <h2>Попробуйте ARC</h2>
+      <p>Оставьте заявку на участие в бета-тесте и получите ранний доступ к приложению. <br class="closing-break" />Участие бесплатно, а ваши отзывы помогают нам развивать продукт дальше.</p>
+      <button class="button button--hero closing-cta" type="button"><span class="button--hero__background" aria-hidden="true"><span class="button--hero__fill"></span><span class="button--hero__fill button--hero__fill--dark"></span></span><span class="button--hero__inner" data-text="Записаться на&nbsp;бета-тест"><span class="button--hero__text">Записаться на&nbsp;бета-тест</span></span></button>
+    </div>
+    <div class="footer-details">
+      <div><img class="footer-logo" src="/images/arc-logo.svg" alt="ARC" width="32" height="32" /><p>© 2026 Artist Reference Collection</p><p>Политика обработки персональных данных</p><p>Лицензионное соглашение</p></div>
+      <div><h3>Для кого</h3><ul><li>Возможности и сравнение</li><li>Дизайнерам</li><li>Художникам</li><li>Фотографам</li><li>Иллюстраторам</li><li>Референсы для генерации</li></ul></div>
+      <div><h3>ARC</h3><ul><li><a href="https://arc-app.gitbook.io/support">База знаний</a></li><li>Почта</li><li><a href="https://t.me/arc_app">Telegram</a></li><li>Instagram</li></ul></div>
+      <div><h3>Системные требования</h3><p>Windows 10 или 11, 64-bit. Около 1 ГБ на диск плюс место под библиотеку.</p><h3 class="footer-ai-heading">Системные требования для AI моделей</h3><p>Минимальные: 2 ГБ оперативной памяти и около 350 МБ на диске. Лёгкий поиск работает без отдельной видеокарты.</p><p>Рекомендуемые: 12 ГБ оперативной памяти и NVIDIA с примерно 10 ГБ видеопамяти — тогда доступны качественный поиск и подписи к кадрам.</p></div>
+    </div>
+  </div>
+</footer>
+<script>
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const scenes = document.querySelectorAll<HTMLElement>('.collect-scene, .capture-scene');
+  const mobileScenes = window.matchMedia('(max-width: 767px)');
+  const extensionScene = document.querySelector<HTMLElement>('.collect-scene.extension');
+  if (extensionScene) {
+    const pointer = extensionScene.querySelector<HTMLElement>('.extension-cursor');
+    const cards = Array.from(extensionScene.querySelectorAll<HTMLElement>('.extension-card'));
+    let current: HTMLElement | undefined;
+    let widgetFrame = 0;
+    const updateWidgets = () => {
+      if (!extensionScene.classList.contains('scene-running')) { current?.classList.remove('widget-visible'); current = undefined; widgetFrame = 0; return; }
+      if (pointer && extensionScene.classList.contains('scene-running') && getComputedStyle(pointer).opacity !== '0') {
+        const rect = pointer.getBoundingClientRect();
+        const x = rect.left + rect.width * .371;
+        const y = rect.top + rect.height * .261;
+        const hit = cards.find(card => { const box = card.getBoundingClientRect(); return x >= box.left && x <= box.right && y >= box.top && y <= box.bottom; });
+        if (hit !== current) { current?.classList.remove('widget-visible'); hit?.classList.add('widget-visible'); current = hit; }
+      } else if (current) { current.classList.remove('widget-visible'); current = undefined; }
+      widgetFrame = requestAnimationFrame(updateWidgets);
+    };
+    new MutationObserver(() => { if (extensionScene.classList.contains('scene-running') && !widgetFrame) widgetFrame = requestAnimationFrame(updateWidgets); }).observe(extensionScene, { attributes: true, attributeFilter: ['class'] });
+    if (extensionScene.classList.contains('scene-running')) widgetFrame = requestAnimationFrame(updateWidgets);
+  }
+  if ('IntersectionObserver' in window) {
+    const visibleScenes = new Set<Element>();
+    const syncScenes = () => scenes.forEach(scene => scene.classList.toggle('scene-running', visibleScenes.has(scene) && !document.hidden && !reducedMotion.matches && !mobileScenes.matches));
+    const sceneObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) visibleScenes.add(entry.target); else visibleScenes.delete(entry.target); });
+      syncScenes();
+    }, { threshold: .55 });
+    scenes.forEach(scene => sceneObserver.observe(scene));
+    document.addEventListener('visibilitychange', syncScenes);
+    reducedMotion.addEventListener('change', syncScenes);
+    mobileScenes.addEventListener('change', syncScenes);
+  }
+  document.querySelectorAll<HTMLElement>('[data-examples]').forEach(section => {
+    const buttons = Array.from(section.querySelectorAll<HTMLButtonElement>('[data-example]'));
+    const panels = Array.from(section.querySelectorAll<HTMLElement>('[data-example-panel]'));
+    const descriptions = Array.from(section.querySelectorAll<HTMLElement>('[data-example-description]'));
+    const viewport = section.querySelector<HTMLElement>('.examples-scroll');
+    if (!viewport) return;
+    let active = 0;
+    let visible = false;
+    let animation: Animation | null = null;
+    const sync = () => {
+      const running = visible && !document.hidden && !reducedMotion.matches;
+      if (!animation && running) {
+        const progress = buttons[active].querySelector<HTMLElement>('.tab-progress');
+        if (!progress) return;
+        animation = progress.animate([{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], { duration: 15000, fill: 'forwards' });
+        animation.onfinish = () => select((active + 1) % buttons.length);
+      }
+      if (running) animation?.play(); else animation?.pause();
+    };
+    const select = (index: number) => {
+      animation?.cancel();
+      animation = null;
+      active = index;
+      buttons.forEach((button, i) => button.setAttribute('aria-pressed', String(i === active)));
+      panels.forEach((panel, i) => { panel.hidden = i !== active; });
+      descriptions.forEach((description, i) => { description.hidden = i !== active; });
+      if (window.matchMedia('(max-width: 767px)').matches) {
+        const tabs = buttons[active].parentElement;
+        if (tabs) tabs.scrollTo({ left: buttons[active].offsetLeft - tabs.offsetLeft, behavior: reducedMotion.matches ? 'instant' : 'smooth' });
+      }
+      sync();
+    };
+    buttons.forEach((button, i) => button.addEventListener('click', () => select(i)));
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([entry]) => { visible = entry.isIntersecting && entry.intersectionRatio >= .99; sync(); }, { threshold: [.99, 1] }).observe(viewport);
+    }
+    document.addEventListener('visibilitychange', sync);
+    reducedMotion.addEventListener('change', () => { if (reducedMotion.matches) { animation?.cancel(); animation = null; } sync(); });
+  });
+  if (!reducedMotion.matches && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('motion-visible'); observer.unobserve(entry.target); }
+    }), { threshold: .08 });
+    document.querySelectorAll<HTMLElement>('.section-heading > h2, .section-heading > .section-summary, .section-heading > p, .examples, .search .example-card, .more .example-card, .closing > *, .footer-details > div').forEach(element => {
+      if (element.getBoundingClientRect().top > window.innerHeight) { element.classList.add('motion-pending'); observer.observe(element); }
+    });
+    const footer = document.querySelector<HTMLElement>('#footer');
+    if (footer) {
+      footer.classList.add('glow-observed');
+      new IntersectionObserver(([entry]) => footer.classList.toggle('glow-visible', entry.isIntersecting), { threshold: .05 }).observe(footer);
+    }
+  }
+</script>
+<style>
+  .landing-section { --gap: 32px; --surface: #1a1a1e; padding: clamp(80px, 10vw, 192px) max(64px, calc((100% - 1504px) / 2)); background: var(--surface); border-bottom: 1px solid #2f3035; color: #b4b5bf; }
+  .section-inner { min-width: 0; }
+  .section-heading { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); margin-bottom: clamp(32px, 4vw, 64px); }
+  h2, h3, p, figure { margin: 0; }
+  h2 { color: var(--text-primary); font: 600 var(--font-heading-xl)/var(--line-heading-xl) "Google Sans", sans-serif; }
+  h3 { color: var(--text-primary); font: 600 var(--font-heading-s)/var(--line-heading-s) "Google Sans", sans-serif; }
+  p, figcaption { font: 400 var(--font-paragraph-l)/var(--line-paragraph-l) "Google Sans", sans-serif; white-space: pre-line; }
+  .section-heading p, .closing p { font-size: var(--font-paragraph-xl); line-height: var(--line-paragraph-xl); }
+  img { display: block; width: 100%; height: auto; }
+  .cards { display: grid; gap: var(--gap); }
+  .example-card { border: 1px solid #2f3035; border-radius: 16px; overflow: clip; background: #242529; min-width: 0; }
+  .example-card p { margin-top: 8px; text-wrap: pretty; }
+  .stack h3 { font-size: var(--font-heading-m); line-height: var(--line-heading-m); }
+  .card-copy { padding: 24px 32px 32px; }
+  .stack { gap: 64px; }
+  .stack .example-card { position: sticky; top: calc(var(--stack-top, 0px) + var(--step) * 32px); display: grid; align-items: start; grid-template-columns: 1fr 2fr; padding-top: 64px; background: var(--surface); border: 0; border-top: 1px solid #2f3035; border-radius: 0; }
+  .stack .scene-viewport { grid-column:2; grid-row:1; min-width:0; }
+  .scene-viewport__content { width:100%; }
+  .stack img { grid-column: 2; grid-row: 1; aspect-ratio: 991 / 500; border-radius: 16px; }
+  .stack .card-copy { grid-column: 1; grid-row: 1; padding-top: 0; }
+  .stack .example-card:last-child { top: 0; }
+  .collect .section-heading { position: sticky; top: var(--collect-sticky-offset, 32px); background: var(--surface); padding-bottom: 24px; margin-bottom: 40px; }
+  .search .bento { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  .search .example-card { grid-column: span 5; }
+  .search .example-card:first-child, .search .example-card:last-child { grid-column: span 7; }
+  .search img { aspect-ratio: auto; object-fit: cover; height: clamp(240px, 23vw, 414px); }
+  .more .bento { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .more .example-card:nth-child(2) { grid-column: 2; grid-row: span 2; display: flex; flex-direction: column-reverse; justify-content: space-between; }
+  .more img { aspect-ratio: 478 / 300; }
+  .more .example-card:nth-child(2) img { aspect-ratio: 478 / 550; }
+  .example-tabs { display: flex; overflow-x: auto; }
+  .example-tabs button {
+    position: relative;
+    flex: none;
+    min-height: 40px;
+    padding-inline: 16px;
+    border: 1px solid #2f3035;
+    border-radius: 0;
+    background: transparent;
+    color: #b4b5bf;
+    font: 400 14px/22px "Google Sans", sans-serif;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .example-tabs button + button { margin-inline-start: -1px; }
+  .example-tabs button:first-child { border-start-start-radius: 12px; border-end-start-radius: 12px; }
+  .example-tabs button:last-child { border-start-end-radius: 12px; border-end-end-radius: 12px; }
+  .example-tabs button[aria-pressed="true"] { z-index: 1; }
+  .example-tabs button[aria-pressed="true"],
+  .example-tabs button:focus-visible { border-color: #44454d; background: #242529; color: #f3f3f4; }
+  .example-tabs button:focus-visible { z-index: 2; outline: 1px solid #f3f3f4; outline-offset: -3px; }
+  @media (hover: hover) {
+    .example-tabs button:hover { z-index: 2; border-color: #44454d; background: #242529; color: #f3f3f4; }
+  }
+  @media (max-width: 767px) {
+    .example-tabs button { min-height: 32px; padding-inline: 8px; }
+    .example-tabs button:first-child { border-start-start-radius: 8px; border-end-start-radius: 8px; }
+    .example-tabs button:last-child { border-start-end-radius: 8px; border-end-end-radius: 8px; }
+  }
+  .section-summary { min-width: 0; }
+  .section-summary .example-tabs { margin-top: 16px; }
+  .examples figure { display: grid; grid-template-areas: "preview"; container-type: inline-size; border: 1px solid #2f3035; border-radius: 16px; overflow: clip; background: #242529; }
+  .examples figure[hidden] { display: none; }
+  .examples figure img { grid-area: preview; aspect-ratio: 1504 / 700; object-fit: contain; }
+  .examples figcaption { grid-area: preview; align-self: end; position: relative; padding: 48px 24px 24px; background: linear-gradient(transparent, #1a1a1e 72%); text-align: center; color: #f3f3f4; }
+  .examples figcaption span { display: block; width: min(100%, 66.667cqi); margin-inline: auto; text-wrap: pretty; }
+  .faq-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 64px var(--gap); }
+  .faq-list p { margin-top: 8px; max-width: 55ch; text-wrap: pretty; }
+  .faq-contact { color: var(--text-primary); }
+  #footer { position: relative; isolation: isolate; overflow: clip; }
+  #footer::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background:
+      radial-gradient(ellipse min(1250px, 70vw) 82% at 50% 100%, #ff5a29 0%, rgb(255 90 41 / 86%) 17%, rgb(255 90 41 / 55%) 34%, rgb(255 90 41 / 23%) 59%, rgb(255 90 41 / 5%) 83%, rgb(255 90 41 / 0%) 100%),
+      radial-gradient(ellipse min(1360px, 76vw) 86% at 50% 100%, rgb(16 116 172 / 70%) 0%, rgb(16 116 172 / 40%) 35%, rgb(16 116 172 / 15%) 62%, rgb(16 116 172 / 0%) 100%);
+    pointer-events: none;
+  }
+  .closing { display: grid; justify-items: center; gap: 16px; text-align: center; padding-bottom: clamp(80px, 10vw, 192px); color: #f3f3f4; }
+  .closing p { max-width: 992px; }
+  .closing-cta { margin-top: 16px; }
+  .closing-cta .button--hero__background { background: #ff6b3e; }
+  .footer-details { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); border-top: 1px solid rgb(248 248 248 / 10%); padding-top: 48px; }
+  .footer-details p, .footer-details li, .footer-details h3 { font-size: 14px; line-height: 22px; }
+  .footer-details h3:not(:first-child) { margin-top: 12px; }
+  .footer-details ul { list-style: none; padding: 0; margin: 8px 0 0; }
+  .footer-details { color: #f3f3f4; }
+  .footer-details h3 { color: rgb(255 255 255 / 50%); font-weight: 400; }
+  .footer-details a { color: inherit; text-decoration: none; }
+  .footer-details a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .footer-details li + li, .footer-details > div:first-child p + p { margin-top: 16px; }
+  .footer-details h3 + p, .footer-details > div:last-child p + p { margin-top: 8px; }
+  .footer-details .footer-ai-heading { margin-top: 32px; }
+  @media (min-width: 1280px) {
+    .landing-section { padding-block: 192px; }
+    .closing { padding-bottom: 192px; }
+    .footer-details { padding-top: 192px; gap: 0; grid-template-columns: minmax(0, 352fr) minmax(0, 240fr) minmax(0, 432fr) minmax(0, 480fr); }
+    .footer-details > div:not(:last-child) { padding-inline-end: 24px; }
+  }
+  .footer-logo { width: 32px; margin-bottom: 16px; }
+  @media (max-width: 1023px) {
+    .landing-section { padding-inline: 36px; --gap: 20px; }
+    .stack .example-card { padding-top: 32px; }
+    .more .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .faq-list, .footer-details { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 767px) {
+    .landing-section { padding-inline: 20px; --gap: 16px; }
+    .section-heading, .faq-list { grid-template-columns: 1fr; }
+    .faq-list { row-gap: 20px; }
+    .faq-list article + article { border-top: 1px solid var(--line); padding-top: 20px; }
+    .footer-details { display: flex; flex-direction: column; gap: 40px; padding-top: 80px; }
+    .footer-details p, .footer-details li, .footer-details h3 { font-size: var(--font-paragraph-m); line-height: var(--line-paragraph-m); }
+    .footer-details li + li, .footer-details > div:first-child p + p { margin-top: 12px; }
+    .closing { padding-bottom: 80px; }
+    .examples figcaption span { width: 100%; }
+
+    .card-copy { padding: 16px 20px 20px; }
+    .collect .section-heading { position:static; }
+    .stack { gap:32px; }
+    .stack .example-card { position:static; display:flex; flex-direction:column-reverse; padding-top:24px; }
+    .stack .scene-viewport { width:100%; overflow-x:auto; overscroll-behavior-x:contain; touch-action:pan-x pan-y; scrollbar-width:none; }
+    .stack .scene-viewport::-webkit-scrollbar { display:none; }
+    .stack .scene-viewport__content { width:max(100%, 640px); }
+    .stack .card-copy { padding-top: 0; }
+    .stack .example-card:last-child { top: 0; }
+    .search .bento, .more .bento { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+    .search .bento::-webkit-scrollbar, .more .bento::-webkit-scrollbar { display: none; }
+    .search .bento .example-card, .more .bento .example-card { flex: 0 0 min(320px, 100%); scroll-snap-align: start; }
+    .more .example-card:nth-child(2) { flex-direction: column; }
+    .search img { height: auto; aspect-ratio: 1; object-fit: cover; }
+    .examples figure, .example-card { border-radius: 8px; }
+    .examples figure { grid-template-areas: "preview" "caption"; }
+    .examples figcaption { grid-area: caption; background: #1a1a1e; padding: 12px 16px 16px; }
+    .closing-cta { width: 100%; }
+    .closing-break { display: none; }
+    .stack .example-card { border-radius: 0; }
+    .stack img, .stack :global(.capture-scene), .stack :global(.collect-scene) { border-radius:8px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .collect .section-heading, .stack .example-card { position: static; }
+  }
+</style>
+<script>
+  const heading = document.querySelector<HTMLElement>('.collect .section-heading');
+  if (heading) {
+    const update = () => heading.closest<HTMLElement>('.collect')?.style.setProperty('--stack-top', `${heading.offsetHeight + (parseFloat(getComputedStyle(heading).top) || 0)}px`);
+    new ResizeObserver(update).observe(heading);
+    update();
+  }
+</script>
+
+<style>
+  .view .examples .example-tabs { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 32px; overflow: visible; margin-top: 32px; }
+  .view .examples .example-tabs button { display: flex; flex-direction: column; gap: 8px; height: auto; padding: 0 0 20px; margin: 0; border: 0; border-radius: 0; background: transparent; text-align: left; white-space: normal; }
+  .view .examples .example-tabs button:hover, .examples .example-tabs button[aria-pressed="true"] { background: transparent; }
+  .tab-title { color: var(--text-primary); font: 600 var(--font-heading-s)/var(--line-heading-s) "Google Sans",sans-serif; }
+  .tab-copy { color: var(--text-secondary); font: 400 var(--font-paragraph-l)/var(--line-paragraph-l) "Google Sans",sans-serif; }
+  .tab-track { position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: #44454d; }
+  .tab-progress { display: block; width: 100%; height: 100%; background: #ff6b3e; transform: scaleX(0); transform-origin: left; }
+  .organize .example-tabs {
+    justify-content: center;
+    overflow: visible;
+    margin-top: 16px;
+  }
+  .organize .example-tabs button[aria-pressed="true"] {
+    border-color: var(--brand);
+    background: var(--surface-raised);
+  }
+  .organize .examples figcaption {
+    grid-area: preview;
+    justify-self: start;
+    max-inline-size: min(34ch, calc(100% - 2 * var(--caption-inset)));
+    margin: var(--caption-inset);
+    padding: 12px 16px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+    color: var(--text-primary);
+    text-align: start;
+    text-wrap: pretty;
+  }
+  .organize .examples figure { --caption-inset: clamp(16px, 2vw, 32px); }
+  @media (max-width: 767px) {
+    .organize .examples figure {
+      --caption-inset: 8px;
+      aspect-ratio: 4 / 3;
+      grid-template-areas: "preview";
+      grid-template-rows: minmax(0, 1fr);
+    }
+    .organize .examples figure img { align-self: start; }
+    .organize .examples figcaption {
+      justify-self: stretch;
+      max-inline-size: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+    .organize .example-tabs button { min-height: 44px; }
+  }
+  @media (max-width: 360px) {
+    .organize .example-tabs {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 4px;
+    }
+    .organize .example-tabs button {
+      margin-inline-start: 0;
+      border-radius: 8px;
+    }
+  }
+  .examples figure:not([hidden]) { animation: example-in 380ms ease-out both; }
+  @keyframes example-in { from { opacity: .72; } to { opacity: 1; } }
+  @media (max-width: 767px) {
+    .view .examples .example-tabs { display: flex; gap: 16px; overflow-x: auto; scrollbar-width: none; }
+    .view .examples .example-tabs button { flex: 0 0 min(280px,85%); }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .motion-pending { opacity: 0; transform: translateY(20px); transition: opacity 600ms ease-out, transform 600ms cubic-bezier(.2,.7,.2,1); }
+    .motion-pending.motion-visible { opacity: 1; transform: translateY(0); }
+    .section-heading > .section-summary, .section-heading > p { transition-delay: 100ms; }
+    .examples { transition-delay: 120ms; }
+    .search .example-card:nth-child(even), .more .example-card:nth-child(3) { transition-delay: 100ms; }
+    .closing > p { transition-delay: 80ms; }
+    .closing > button { transition-delay: 160ms; }
+    .footer-details > div:nth-child(2) { transition-delay: 60ms; }
+    .footer-details > div:nth-child(3) { transition-delay: 120ms; }
+    .footer-details > div:nth-child(4) { transition-delay: 180ms; }
+    @media (max-width: 767px) { .motion-pending { transform: translateY(10px); } }
+    #footer.glow-observed::before { opacity: 0; transition: opacity 900ms ease-out; }
+    #footer.glow-observed.glow-visible::before { opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) { .examples figure:not([hidden]) { animation: none; } }
+</style>
+<style>
+  [data-examples] .section-summary { display: grid; align-content: start; gap: 16px; }
+  [data-examples] .section-summary .example-tabs { display: flex; gap: 32px; overflow-x: auto; margin: 0; border-bottom: 1px solid var(--line); scrollbar-width: none; }
+  [data-examples] .example-tabs button, [data-examples] .example-tabs button:first-child, [data-examples] .example-tabs button:last-child { flex: none; position: relative; min-height: 31px; padding: 0 0 8px; margin: 0; border: 0; border-radius: 0; background: transparent; color: #636471; font: 400 14px/22px "Google Sans", sans-serif; white-space: nowrap; }
+  [data-examples] .example-tabs button[aria-pressed="true"], [data-examples] .example-tabs button:hover { color: var(--text-primary); background: transparent; }
+  [data-examples] .example-tabs button:focus-visible { outline: 1px solid var(--text-primary); outline-offset: 3px; }
+  [data-examples] .tab-progress { position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--brand); transform: scaleX(0); transform-origin: left; }
+  [data-examples] .example-descriptions { display: grid; }
+  [data-examples] .example-descriptions p { grid-area: 1 / 1; }
+  [data-examples] .example-descriptions p[hidden] { display: block; visibility: hidden; }
+  [data-examples] .examples-scroll { overflow: hidden; }
+  [data-examples] .examples figure:not([hidden]), [data-examples] .example-descriptions p:not([hidden]) { animation: example-switch 150ms ease-out both; }
+  @keyframes example-switch { from { opacity: 0; } to { opacity: 1; } }
+  @media (max-width: 767px) {
+    [data-examples] .section-summary .example-tabs { gap: 24px; }
+    [data-examples] .examples-scroll { overflow-x: auto; overscroll-behavior-x: contain; touch-action: pan-x pan-y; scrollbar-width: none; }
+    [data-examples] .examples figure { width: 688px; aspect-ratio: 1504 / 700; display: grid; grid-template-areas: "preview"; }
+    [data-examples] .examples figure img { width: 100%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-examples] .examples figure:not([hidden]), [data-examples] .example-descriptions p:not([hidden]) { animation: none; }
+  }
+</style>
+
+<style>
+  [data-examples] .section-summary .example-tabs { justify-content: flex-start; }
+  [data-examples] .section-heading { margin-bottom: 48px; }
+</style>

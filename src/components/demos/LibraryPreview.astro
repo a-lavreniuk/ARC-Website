@@ -1,16 +1,31 @@
 ---
 const collections = [
-  {name:'UI', detail:'128 карточек', sections:'16 разделов'},
+  {name:'UI', detail:'15 карточек', sections:'3 раздела'},
   {name:'Портреты', detail:'32 карточки', sections:''},
   {name:'Пейзажи', detail:'512 карточек', sections:'12 разделов'},
-  {name:'Анатомия', detail:'64 карточки', sections:'16 разделов'}
+  {name:'Анатомия', detail:'64 карточки', sections:'16 разделов'},
+  {name:'Архитектура', detail:'96 карточек', sections:'8 разделов'},
+  {name:'Цвет', detail:'72 карточки', sections:'6 разделов'}
+];
+const ref = (n, thumb = true) => `/images/references/ref-${String(n % 14 + 1).padStart(2,'0')}${thumb ? '-thumb' : ''}.webp`;
+const referenceSizes = [[1024,1536],[1916,821],[1374,1145],[1145,1374],[1536,1024],[887,1774],[1254,1254],[1377,1142],[1254,1254],[1374,1145],[1536,1024],[1536,1024],[1024,1536],[1536,1024]];
+const collectionThumb = (n) => `/images/references/collections/collection-${String(n).padStart(2,'0')}.webp`;
+const collectionRefs = [
+  ['/images/references/ref-06-thumb.webp', ...[3,4,5].map(collectionThumb)],
+  ['/images/references/ref-01-thumb.webp', ...[6,7,8].map(collectionThumb)],
+  ['/images/references/ref-02-thumb.webp', ...[9,10,11].map(collectionThumb)],
+  ['/images/references/ref-11-thumb.webp', ...[12,18,19].map(collectionThumb)],
+  ['/images/references/ref-03-thumb.webp', ...[15,16,17].map(collectionThumb)],
+  [4,6,8,9].map(n => ref(n))
 ];
 const heights = [[154,275,154],[154,154,275],[275,154,344],[344,154,275],[276,154,154]];
 const colors = ['#79635e','#6f7d76','#8a776a','#686e7c','#8a7b81','#7b806e','#7d6f7b','#6f777b','#978675','#727d78','#86736c','#69747c','#8b7f72','#73766c','#796e75'];
+import RightMenuDemo from './RightMenuDemo';
+import './arc-context/context-menu-source.css';
 const icon = (name) => `/images/demo-icons/${name}.svg`;
 ---
 <div class="arc-demo" aria-label="Предпросмотр библиотеки ARC">
-  <div class="arc-demo__surface">
+  <div class="arc-demo__surface"><RightMenuDemo client:load />
     <div class="arc-demo__navbar">
       <div class="arc-demo__island arc-demo__nav">
         <button type="button" class="arc-demo__active">Библиотека<span class="arc-demo__split"><img src={icon('chevron-brand')} alt="" /></span></button>
@@ -23,26 +38,192 @@ const icon = (name) => `/images/demo-icons/${name}.svg`;
         <button type="button" class="arc-demo__icon" aria-label="Поиск"><img src={icon('search')} alt="" /></button>
       </div>
       <div class="arc-demo__island arc-demo__actions">
-        {['sort-desc','filter','grid-small'].map((name,index) => <button type="button" class="arc-demo__icon" aria-label={['Сортировка','Фильтры','Вид сетки'][index]}><img src={icon(name)} alt="" /></button>)}
+        {['sorting','filter','layout-waterfall'].map((name,index) => <button type="button" class="arc-demo__icon" aria-label={['Сортировка','Фильтры','Вид сетки'][index]}><img src={icon(name)} alt="" /></button>)}
         <button type="button" class="arc-demo__add">Добавить</button>
         <button type="button" class="arc-demo__icon" aria-label="Меню"><img src={icon('chevron-down')} alt="" /></button>
       </div>
     </div>
-    <div class="arc-demo__collections">
-      {collections.map((c,i) => <div class="arc-demo__collection">
-        <div class="arc-demo__collection-images">{[0,1,2,3].map((j)=><div style={`background:${colors[(i*4+j)%colors.length]}`}></div>)}</div>
+    <div class="demo-detail" role="dialog" aria-modal="true" aria-label="Просмотр карточки" hidden>
+      <div class="demo-detail__main">
+        <div class="demo-detail__preview">
+          <div class="demo-detail__stage"><div class="demo-detail__image"></div>
+            <button type="button" class="demo-detail__nav demo-detail__nav--prev" aria-label="Предыдущая карточка"><img src={icon('chevron-right')} alt="" /></button>
+            <button type="button" class="demo-detail__nav demo-detail__nav--next" aria-label="Следующая карточка"><img src={icon('chevron-left')} alt="" /></button>
+          </div>
+          <div class="demo-detail__preview-options"><div class="demo-detail__preview-meta"><button type="button" class="demo-detail__small-tool" aria-label="Информация о файле"><img src={icon('detail-info')} alt="" /></button><span>1920×1080</span><span>128 КБ</span></div><div class="demo-detail__preview-meta"><button type="button" class="demo-detail__small-tool" aria-label="Уместить"><img src={icon('detail-shrink')} alt="" /></button><button type="button" class="demo-detail__small-tool" aria-label="Увеличить"><img src={icon('detail-plus')} alt="" /></button><span>100%</span></div></div>
+        </div>
+        <aside class="demo-detail__settings">
+          <div class="demo-detail__toolbar">
+            <div class="demo-detail__toolbar-group"><button type="button" class="demo-detail__tool" aria-label="Удалить карточку"><img src={icon('detail-trash')} alt="" /></button></div>
+            <div class="demo-detail__toolbar-group"><button type="button" class="demo-detail__tool" aria-label="Копировать настройки"><img src={icon('detail-copy-settings')} alt="" /></button><button type="button" class="demo-detail__tool" aria-label="Применить настройки"><img src={icon('detail-paste-settings')} alt="" /></button></div>
+            <div class="demo-detail__toolbar-group"><button type="button" class="demo-detail__tool" aria-label="Открыть в новом окне"><img src={icon('detail-picture-in-picture')} alt="" /></button></div>
+            <div class="demo-detail__toolbar-group"><button type="button" class="demo-detail__tool" aria-label="Добавить в мудборд"><img src={icon('detail-bookmark')} alt="" /></button><button type="button" class="demo-detail__tool" aria-label="Открыть папку"><img src={icon('detail-folder-open')} alt="" /></button><button type="button" class="demo-detail__tool demo-detail__id"><span data-detail-id></span><img src={icon('detail-copy')} alt="" /></button></div>
+            <button type="button" class="demo-detail__tool demo-detail__close" aria-label="Закрыть"><img src={icon('detail-close')} alt="" /></button>
+          </div>
+          <div class="demo-detail__scroll">
+            <section class="demo-detail__section"><div class="demo-detail__heading"><h3>Детали</h3><button type="button" class="demo-detail__small-tool" aria-label="Свернуть"><img src={icon('detail-chevron-up')} alt="" /></button></div>
+              <div class="demo-detail__stars" aria-label="Оценка: 4 из 5">{[0,1,2,3,4].map(i=><button type="button" class="demo-detail__star" aria-label={`Оценка ${i+1}`}><img src={icon(i<4?'detail-star-fill':'detail-star-stroke')} alt="" /></button>)}</div>
+              <div class="demo-detail__row"><span><img src={icon('detail-text-short')} alt="" />Имя</span><div class="demo-detail__value" data-detail-name></div></div>
+              <div class="demo-detail__row"><span><img src={icon('detail-link')} alt="" />Ссылка</span><div class="demo-detail__value" data-detail-link></div></div>
+              <div class="demo-detail__row"><span><img src={icon('detail-textarea')} alt="" />Описание</span><div class="demo-detail__value demo-detail__description" data-detail-description></div></div>
+              <button type="button" class="demo-detail__add-tags">Добавить свойство</button>
+            </section>
+            <section class="demo-detail__section"><div class="demo-detail__heading"><h3>Метки <span>3</span></h3><button type="button" class="demo-detail__small-tool" aria-label="Свернуть"><img src={icon('detail-chevron-up')} alt="" /></button></div><div class="demo-detail__tags"></div><button type="button" class="demo-detail__add-tags">Добавить метки <img src={icon('detail-tag-plus')} alt="" /></button></section>
+          </div>
+        </aside>
+      </div>
+    </div>
+    <div class="demo-library-view"><div class="arc-demo__collections-wrap"><button type="button" class="arc-demo__collections-arrow arc-demo__collections-arrow--prev" aria-label="Предыдущие коллекции"><img src={icon('chevron-left')} alt="" /></button><div class="arc-demo__collections" tabindex="0" aria-label="Коллекции">
+      {collections.map((c,i) => <div class="arc-demo__collection" role={i === 0 ? "button" : undefined} tabindex={i === 0 ? 0 : undefined} aria-label={i === 0 ? "Открыть коллекцию UI" : undefined}>
+        <div class="arc-demo__collection-images">{[0,1,2,3].map((j)=><div style={`background:${colors[(i*4+j)%colors.length]} url(${collectionRefs[i][j]}) center / cover`}></div>)}</div>
         <div class="arc-demo__collection-label"><span>{c.name}</span><span>{c.detail}</span>{c.sections && <span>{c.sections}</span>}</div>
       </div>)}
-      <div class="arc-demo__fade"></div>
-    </div>
+    </div><button type="button" class="arc-demo__collections-arrow arc-demo__collections-arrow--next" aria-label="Следующие коллекции"><img src={icon('chevron-right')} alt="" /></button></div>
     <div class="arc-demo__separator"></div>
     <div class="arc-demo__grid">
-      {heights.map((column,i)=><div class="arc-demo__column">{column.map((height,j)=><div class="arc-demo__card" style={`aspect-ratio: 275 / ${height}; background:${colors[i*3+j]}`}></div>)}</div>)}
-    </div>    <div class="arc-demo__blur arc-demo__blur--1" aria-hidden="true"></div><div class="arc-demo__blur arc-demo__blur--2" aria-hidden="true"></div><div class="arc-demo__blur arc-demo__blur--3" aria-hidden="true"></div>
+      {heights.map((column,i)=><div class="arc-demo__column">{column.map((height,j)=><div class="arc-demo__card" role="button" tabindex="0" aria-label="Открыть карточку" data-reference={ref(i*3+j, false)} style={`aspect-ratio: ${referenceSizes[(i*3+j)%14][0]} / ${referenceSizes[(i*3+j)%14][1]}; background:${colors[i*3+j]} url(${ref(i*3+j)}) center / cover`}>
+        <div class="arc-demo__card-shade" aria-hidden="true"></div>
+        <div class="arc-demo__card-overlay" aria-hidden="true">
+          <span class="arc-demo__card-badge"><span class="arc-demo__card-icon arc-demo__card-icon--image"></span>{(i + j) % 3 === 0 ? 'PNG' : 'JPG'}</span>
+          <span class="arc-demo__card-actions">
+            <span class="arc-demo__card-action"><span class="arc-demo__card-icon arc-demo__card-icon--bookmark"></span></span>
+            <span class="arc-demo__card-action"><span class="arc-demo__card-icon arc-demo__card-icon--search"></span></span>
+          </span>
+        </div>
+      </div>)}</div>)}
+    </div></div>
+    <div class="demo-collections-view" hidden><aside class="demo-collections-view__sidebar"><div class="demo-collections-view__list">{collections.map((c,i)=><><button type="button" class:list={["demo-collections-view__item", {"is-active":i===0}]}>{i===0 && <img class="demo-collections-view__chevron" src={icon('chevron-down')} alt="" />}<span class="demo-collections-view__name">{c.name}</span><span class="demo-collections-view__count">{c.detail.split(" ")[0]}</span></button>{i===0 && <div class="demo-collections-view__children">{[{name:'Интерфейсы',count:7},{name:'Иконки',count:5},{name:'Типографика',count:3}].map(child=><button type="button" class="demo-collections-view__item"><span class="demo-collections-view__name">{child.name}</span><span class="demo-collections-view__count">{child.count}</span></button>)}</div>}</>)}</div><div class="demo-collections-view__footer"><button type="button">Добавить коллекцию <img src={icon("detail-folder-plus")} alt="" /></button></div></aside><div class="demo-collections-view__content"><div class="demo-collections-view__heading"><h2>UI <span>15</span></h2></div><div class="demo-collections-view__cards"></div></div></div>
+    <div class="demo-moodboard-view" hidden></div>
+    <div class="arc-demo__blur arc-demo__blur--1" aria-hidden="true"></div><div class="arc-demo__blur arc-demo__blur--2" aria-hidden="true"></div><div class="arc-demo__blur arc-demo__blur--3" aria-hidden="true"></div>
   </div>
 </div>
 <script>
   import './search-demo';
+  const uiItems = [{"image": "/images/references/ref-06.webp", "thumb": "/images/references/ref-06-thumb.webp", "ratio": "887 / 1774"}, {"image": "/images/references/collections/collection-03.webp", "thumb": "/images/references/collections/collection-03.webp", "ratio": "1 / 1"}, {"image": "/images/references/collections/collection-04.webp", "thumb": "/images/references/collections/collection-04.webp", "ratio": "1 / 1"}, {"image": "/images/references/ui/ui-01.webp", "thumb": "/images/references/ui/ui-01-thumb.webp", "ratio": "1199 / 1312"}, {"image": "/images/references/ui/ui-02.webp", "thumb": "/images/references/ui/ui-02-thumb.webp", "ratio": "1199 / 1312"}, {"image": "/images/references/ui/ui-03.webp", "thumb": "/images/references/ui/ui-03-thumb.webp", "ratio": "1672 / 941"}, {"image": "/images/references/ui/ui-04.webp", "thumb": "/images/references/ui/ui-04-thumb.webp", "ratio": "1536 / 1024"}, {"image": "/images/references/ui/ui-05.webp", "thumb": "/images/references/ui/ui-05-thumb.webp", "ratio": "1774 / 887"}, {"image": "/images/references/ui/ui-06.webp", "thumb": "/images/references/ui/ui-06-thumb.webp", "ratio": "1672 / 941"}, {"image": "/images/references/ui/ui-07.webp", "thumb": "/images/references/ui/ui-07-thumb.webp", "ratio": "1199 / 1312"}, {"image": "/images/references/ui/ui-08.webp", "thumb": "/images/references/ui/ui-08-thumb.webp", "ratio": "1536 / 1024"}, {"image": "/images/references/ui/ui-09.webp", "thumb": "/images/references/ui/ui-09-thumb.webp", "ratio": "1672 / 941"}, {"image": "/images/references/ui/ui-10.webp", "thumb": "/images/references/ui/ui-10-thumb.webp", "ratio": "1024 / 1536"}, {"image": "/images/references/ui/ui-11.webp", "thumb": "/images/references/ui/ui-11-thumb.webp", "ratio": "1774 / 887"}, {"image": "/images/references/ui/ui-12.webp", "thumb": "/images/references/ui/ui-12-thumb.webp", "ratio": "1536 / 1024"}];
+  document.querySelectorAll<HTMLElement>('.arc-demo__collections-wrap').forEach((wrap) => {
+    const list = wrap.querySelector<HTMLElement>('.arc-demo__collections');
+    if (!list) return;
+    const prev = wrap.querySelector<HTMLButtonElement>('.arc-demo__collections-arrow--prev');
+    const next = wrap.querySelector<HTMLButtonElement>('.arc-demo__collections-arrow--next');
+    const update = () => { const start = list.scrollLeft <= 1; const end = list.scrollLeft + list.clientWidth >= list.scrollWidth - 1; if (prev) prev.hidden = start; if (next) next.hidden = end; wrap.classList.toggle('has-hidden-left', !start); wrap.classList.toggle('has-hidden-right', !end); };
+    prev?.addEventListener('click', () => list.scrollBy({left:-421, behavior:'smooth'}));
+    next?.addEventListener('click', () => list.scrollBy({left:421, behavior:'smooth'}));
+    list.addEventListener('scroll', update, {passive:true});
+    new ResizeObserver(update).observe(list);
+    update();
+  });
+  document.querySelectorAll<HTMLElement>('.arc-demo__surface').forEach((surface) => {
+    const cards = Array.from(surface.querySelectorAll<HTMLElement>('.arc-demo__card'));
+    const dialog = surface.querySelector<HTMLElement>('.demo-detail');
+    if (!dialog) return;
+    const names = ['Портрет в тёплом свете','Горный пейзаж','Минималистичный интерьер','Живописный портрет','Дизайн упаковки','Интерфейс приложения','Объёмная иконка','Портрет собаки','Иллюстрация персонажа','Керамическая фактура','Анатомический рисунок','Пустынный пейзаж','Графический плакат','Кот в интерьере','Портрет в тёплом свете'];
+    const tags = [['Дизайн','Интерфейс','UI'],['Цвет','Палитра','Настроение'],['Форма','Композиция','Референс']];
+    let current = 0;
+    let origin: HTMLElement | null = null;
+    const render = () => {
+      const uiMode = !surface.querySelector<HTMLElement>('.demo-collections-view')?.hidden;
+      
+      const card = cards[current];
+      const image = dialog.querySelector<HTMLElement>('.demo-detail__image');
+      if (image) { image.style.background = `url('${uiMode ? uiItems[current].image : card.dataset.reference}') center / contain no-repeat`; image.style.aspectRatio = uiMode ? uiItems[current].ratio : card.style.aspectRatio; }
+      const set = (selector: string, value: string) => { const el = dialog.querySelector<HTMLElement>(selector); if (el) el.textContent = value; };
+      set('[data-detail-name]', uiMode ? `UI-референс ${current + 1}` : names[current]);
+      set('[data-detail-link]', `example.com/reference/${current + 1}`);
+      set('[data-detail-description]', uiMode ? 'Референс интерфейса для цифрового продукта.' : `Визуальный референс: ${names[current].toLowerCase()}.`);
+      set('[data-detail-id]', `ARC-${String(current + 1).padStart(4, '0')}`);
+      const list = dialog.querySelector<HTMLElement>('.demo-detail__tags');
+      if (list) { list.replaceChildren(...tags[current % tags.length].map((name, i) => { const chip = document.createElement('span'); chip.className = 'demo-detail__tag'; const dot = document.createElement('i'); dot.style.background = ['#e8ad20','#5dc3aa','#5794ee'][i]; chip.append(dot, document.createTextNode(name)); return chip; })); }
+      const prev = dialog.querySelector<HTMLButtonElement>('.demo-detail__nav--prev'); const next = dialog.querySelector<HTMLButtonElement>('.demo-detail__nav--next');
+      if (prev) prev.disabled = current === 0; if (next) next.disabled = current === (uiMode ? uiItems.length - 1 : cards.length - 1);
+    };
+    const open = (index: number) => { origin = cards[index]; current = index; render(); dialog.hidden = false; dialog.querySelector<HTMLButtonElement>('.demo-detail__close')?.focus({ preventScroll: true }); };
+    const close = () => { dialog.hidden = true; origin?.focus({ preventScroll: true }); };
+    cards.forEach((card, index) => { card.addEventListener('mousedown', (event) => event.preventDefault()); card.addEventListener('click', () => open(index)); card.addEventListener('keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); open(index); } }); });
+    dialog.querySelector('.demo-detail__close')?.addEventListener('click', close);
+    dialog.querySelector('.demo-detail__nav--prev')?.addEventListener('click', () => { if (current > 0) { current--; render(); } });
+    dialog.querySelector('.demo-detail__nav--next')?.addEventListener('click', () => { if (current < (!surface.querySelector<HTMLElement>('.demo-collections-view')?.hidden ? uiItems.length - 1 : cards.length - 1)) { current++; render(); } });
+    dialog.addEventListener('keydown', (event) => { if (event.key === 'Escape') { event.stopPropagation(); close(); } });
+  });
+  document.querySelectorAll<HTMLElement>('.arc-demo__surface').forEach((surface) => {
+    const nav = surface.querySelector<HTMLElement>('.arc-demo__nav');
+    const library = surface.querySelector<HTMLElement>('.demo-library-view');
+    const collectionsView = surface.querySelector<HTMLElement>('.demo-collections-view');
+    const moodboard = surface.querySelector<HTMLElement>('.demo-moodboard-view');
+    const grid = surface.querySelector<HTMLElement>('.demo-library-view .arc-demo__grid');
+    if (!nav || !library || !collectionsView || !moodboard || !grid) return;
+    const buttons = Array.from(nav.querySelectorAll<HTMLButtonElement>(':scope > button'));
+    const uiCollection = library.querySelector<HTMLElement>('.arc-demo__collection[role="button"]');
+    uiCollection?.addEventListener('click', () => buttons[1]?.click());
+    uiCollection?.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); buttons[1]?.click(); }
+    });
+    const copies = [collectionsView.querySelector<HTMLElement>('.demo-collections-view__cards'), moodboard];
+    copies.forEach((destination, sectionIndex) => {
+      if (!destination) return;
+      const clone = grid.cloneNode(true) as HTMLElement;
+      const originals = Array.from(grid.querySelectorAll<HTMLElement>('.arc-demo__card'));
+      const cards = Array.from(clone.querySelectorAll<HTMLElement>('.arc-demo__card'));
+      cards.forEach((card,index) => {
+        if (sectionIndex === 0 && index >= uiItems.length) { card.remove(); return; }
+        if (sectionIndex === 0) { card.style.background = `url('${uiItems[index].thumb}') center / cover no-repeat`; card.style.aspectRatio = uiItems[index].ratio; }
+        if (sectionIndex === 1 && ![0,2,4,7,10,12,14].includes(index)) { card.remove(); return; }
+        card.addEventListener('mousedown', (event) => event.preventDefault());
+        card.addEventListener('click', () => originals[index].click());
+        card.addEventListener('keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); originals[index].click(); } });
+      });
+      destination.append(clone);
+    });
+    buttons.forEach((button,index) => button.addEventListener('click', () => {
+      [library,collectionsView,moodboard].forEach((view,i) => { view.hidden = i !== index; });
+      buttons.forEach((item,i) => { item.classList.toggle('arc-demo__tab-selected', i === index && i !== 0); item.classList.toggle('arc-demo__active-inactive', i !== index && i === 0); item.setAttribute('aria-current', i === index ? 'page' : 'false'); });
+      const detail = surface.querySelector<HTMLElement>('.demo-detail'); if (detail) detail.hidden = true;
+    }));
+  });
+  // Show the mobile window can scroll once, without interrupting user input.
+  document.querySelectorAll<HTMLElement>('.hero__demo').forEach((viewport) => {
+    const mobileOnly = window.matchMedia('(max-width: 640px)');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let interacted = false;
+    let frame = 0;
+    const interrupt = () => { interacted = true; if (frame) cancelAnimationFrame(frame); };
+    for (const type of ['pointerdown', 'touchstart', 'wheel'] as const) viewport.addEventListener(type, interrupt, { passive: true });
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries.some(entry => entry.isIntersecting) || !mobileOnly.matches) return;
+      observer.disconnect();
+      if (reduceMotion.matches || interacted || viewport.scrollLeft > 1) return;
+      const max = viewport.scrollWidth - viewport.clientWidth;
+      if (max <= 1) return;
+      const distance = Math.min(60, max);
+      const start = performance.now();
+      const duration = 1400;
+      const step = (now: number) => {
+        if (interacted || !mobileOnly.matches || reduceMotion.matches) return;
+        const t = Math.min((now - start) / duration, 1);
+        const progress = t < .5 ? 1 - Math.pow(1 - t * 2, 3) : Math.pow(1 - (t - .5) * 2, 3);
+        viewport.scrollLeft = distance * progress;
+        if (t < 1) frame = requestAnimationFrame(step); else frame = 0;
+      };
+      frame = requestAnimationFrame(step);
+    }, { threshold: 0.35 });
+    observer.observe(viewport);
+  });
+  // Mouse dragging allows testing the mobile, touch-scrolling preview on desktop too.
+  document.querySelectorAll<HTMLElement>('.hero__demo').forEach((viewport) => {
+    let startX: number | null = null;
+    let startScroll = 0;
+    viewport.addEventListener('pointerdown', (event) => {
+      if (event.pointerType !== 'mouse' || event.button !== 0 || !window.matchMedia('(max-width: 640px)').matches) return;
+      startX = event.clientX; startScroll = viewport.scrollLeft;
+      viewport.setPointerCapture(event.pointerId);
+      viewport.classList.add('is-dragging');
+      event.preventDefault();
+    });
+    viewport.addEventListener('pointermove', (event) => { if (startX !== null) viewport.scrollLeft = startScroll - (event.clientX - startX); });
+    const end = () => { startX = null; viewport.classList.remove('is-dragging'); };
+    viewport.addEventListener('pointerup', end);
+    viewport.addEventListener('pointercancel', end);
+    viewport.addEventListener('lostpointercapture', end);
+  });
   const mobile = window.matchMedia('(max-width: 640px)');
   const updatePreview = () => {
     document.querySelectorAll<HTMLElement>('.arc-demo__surface').forEach((element) => {
@@ -60,11 +241,20 @@ const icon = (name) => `/images/demo-icons/${name}.svg`;
       surface.style.zoom = String(displayWidth / logicalWidth);
     });
   };
+  // In ARC the overlay is suppressed if a card is too short for its controls.
+  const cardObserver = new ResizeObserver((entries) => {
+    entries.forEach(({ target }) => {
+      target.classList.toggle('arc-demo__card--short', (target as HTMLElement).offsetHeight < 104);
+    });
+  });
+  document.querySelectorAll('.arc-demo__card').forEach((card) => cardObserver.observe(card));
   window.addEventListener('resize', resizeScene);
   resizeScene();
   mobile.addEventListener('change', updatePreview);
   updatePreview();
 </script>
+
+
 
 
 

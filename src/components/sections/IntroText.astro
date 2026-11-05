@@ -1,0 +1,63 @@
+<section class="intro-text" aria-label="Ваша библиотека — ваши правила">
+  <p class="intro-text__copy"><span>Ваша библиотека — ваши правила.</span><span class="intro-text__body"> Собирайте референсы и&nbsp;организуйте их так, как удобно вам. Создавайте собственные категории, метки, коллекции и&nbsp;разделы и&nbsp;постепенно выстраивайте библиотеку под&nbsp;свой рабочий процесс</span></p>
+</section>
+<style>
+  .intro-text { padding:80px max(208px, calc((100% - 1504px) / 2)) 0; }
+  .intro-text__copy { margin:0; color:#636471; font:600 48px/48px "Google Sans",sans-serif; letter-spacing:0; }
+  .intro-text__copy > span:first-child { color:#f3f3f4; }
+  @media (max-width:1919px) { .intro-text { padding-inline:64px; } }
+  @media (max-width:1279px) { .intro-text { padding-inline:62px; } .intro-text__copy { font-size:36px; line-height:36px; } }
+  @media (max-width:1023px) { .intro-text { padding-inline:36px; } .intro-text__copy { font-size:28px; line-height:28px; } }
+  @media (max-width:767px) { .intro-text { padding:0 22px; } }
+  @media (max-width:539px) { .intro-text { padding-inline:18px; } .intro-text__copy { font-size:24px; line-height:24px; } }
+  @media (max-width:399px) { .intro-text { padding-inline:20px; } }
+</style>
+<style>
+  @media (prefers-reduced-motion: no-preference) {
+    .intro-text.motion-ready :global(.intro-word) { opacity: var(--word-opacity, .14); }
+    .intro-text.motion-ready .intro-text__copy > span:first-child :global(.intro-word) { color: color-mix(in srgb, #636471 calc((1 - var(--word-progress, 0)) * 100%), #f3f3f4); }
+  }
+</style>
+<script>
+  const intro = document.querySelector<HTMLElement>('.intro-text');
+  const motion = window.matchMedia('(prefers-reduced-motion: no-preference)');
+  if (intro) {
+    const parts = intro.querySelectorAll<HTMLElement>('.intro-text__copy > span');
+    const words: HTMLElement[] = [];
+    parts.forEach(part => {
+      const text = part.textContent ?? '';
+      const pieces = text.split(/( +)/);
+      part.replaceChildren(...pieces.map(piece => {
+        if (/^ +$/.test(piece) || !piece) return document.createTextNode(piece);
+        const word = document.createElement('span');
+        word.className = 'intro-word';
+        word.textContent = piece;
+        words.push(word);
+        return word;
+      }));
+    });
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      if (!motion.matches) return;
+      const rect = intro.getBoundingClientRect();
+      const start = window.innerHeight * .70;
+      const end = window.innerHeight * .35;
+      const progress = Math.max(0, Math.min(1, (start - rect.top) / (start - end)));
+      words.forEach((word, index) => {
+        const current = Math.max(0, Math.min(1, progress * (words.length + 3) - index));
+        word.style.setProperty('--word-opacity', String(.14 + current * .86));
+        word.style.setProperty('--word-progress', String(current));
+      });
+    };
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
+    const sync = () => {
+      intro.classList.toggle('motion-ready', motion.matches);
+      if (motion.matches) update();
+    };
+    sync();
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    motion.addEventListener('change', sync);
+  }
+</script>

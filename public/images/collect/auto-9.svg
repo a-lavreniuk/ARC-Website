@@ -1,0 +1,12 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Left Icon" clip-path="url(#clip0_0_346)">
+<path id="Vector" d="M4.5 9.50004L6.5 11.5" stroke-linecap="round" stroke-linejoin="round" stroke="#787988"/>
+<path id="Vector_2" d="M11.5 4.49996L14.5 1.49996" stroke-linecap="round" stroke="#787988"/>
+<path id="Rectangle 124" d="M12.2908 1.86853L8.87574 1.60583C8.00254 1.53866 7.14359 1.85641 6.52433 2.47567L1.41421 7.58579C0.633165 8.36683 0.633164 9.63316 1.41421 10.4142L5.58579 14.5858C6.36683 15.3668 7.63316 15.3668 8.41421 14.5858L13.5243 9.47567C14.1436 8.85641 14.4613 7.99746 14.3942 7.12426L14.1315 3.70924C14.0558 2.72569 13.2743 1.94419 12.2908 1.86853Z" stroke="#787988"/>
+</g>
+<defs>
+<clipPath id="clip0_0_346">
+<rect width="16" height="16" fill="white"/>
+</clipPath>
+</defs>
+</svg>
